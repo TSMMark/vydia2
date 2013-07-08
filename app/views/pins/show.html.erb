@@ -1,0 +1,23 @@
+<div class="row">
+	<span class="span6 offset3">
+		<div class="well clearfix">
+			<%= image_tag @pin.image %>
+			<p>
+			  <%= @pin.user.name %>
+			</p>
+			<p>
+			  <%= @pin.description %>
+			</p>
+
+  		<% if current_user == @pin.user %>
+					<%= link_to 'Edit', edit_pin_path(@pin) %> |
+		  		<%= link_to 'Delete', @pin, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<% end %>
+
+			<span class="pull-right">
+				<%= link_to 'Back', pins_path %>
+	  	</span>
+
+		</div>
+	</span>
+</div>

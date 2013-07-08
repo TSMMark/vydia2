@@ -1,0 +1,85 @@
+/*$baseFontFamily: Oxygen;
+@import url(http://fonts.googleapis.com/css/font-family=Oxygen);*/
+
+$btnPrimaryBackground:			green;
+$navbarBackgroundHighlight:	#333;
+$navbarBackground:					black;
+$navbarText:								whitesmoke;
+$navbarLinkColor:						whitesmoke;
+$navbarLinkColorHover:			white;
+$navbarLinkColorActive:			#CCC;
+$navbarBrandColor:					white;
+
+$myBreakSmall: 488px;
+
+@import 'bootstrap';
+
+body {
+	padding-top:60px;
+}
+
+@import 'bootstrap-responsive';
+
+.hero-unit{
+	padding:60px 5%;
+}
+
+.navbar-inner{
+	@include box-shadow(none !important);
+	border:0;
+}
+
+.footer{
+	margin-top: 50px;
+	color: $grayLight;
+	a{
+		color:$gray;
+	}
+}
+
+/* required for JQ Masonry */
+#pins{
+	margin: 0 auto;
+  @media all and (max-width: $myBreakSmall){
+  	width:auto !important;
+  }
+}
+.box-container{
+	margin: 5px;
+	float: left;
+	font-size: 11px;
+	line-height: 1.4em;
+	width:214px;
+  @media all and (max-width: $myBreakSmall) {
+		position: relative !important;
+		top: 0 !important;
+		left: 0 !important;
+		width: 97%;
+  }
+
+
+	.box{
+		padding:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		border-radius:5px;
+		box-shadow: 1px 1px 10px #444;
+		p{
+			margin:0;
+		}
+		img {
+			display: block;
+			width:100%;
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+
+		}
+		.description{
+		}
+		.box-image{
+			margin-bottom: 4px;
+		}
+	}	
+}
+
