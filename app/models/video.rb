@@ -1,36 +1,33 @@
 class Video < ActiveRecord::Base
   include VideosHelper
 
-  attr_accessible :video_id, :name
+  attr_accessible :token, :name
 
   belongs_to :user, inverse_of: :videos
 
-  validates_presence_of :name, :video_id
-  validates_uniqueness_of :video_id
+  validates_presence_of :name, :token
+  validates_uniqueness_of :token
 
   has_many :impressions, inverse_of: :video
   has_many :networks, through: :impressions
 
-  # find by internal id or youtube video_id
+  # find by internal id or youtube token
   def self.find(id)
     if id.numeric?
       return super id
     else
-      return find_by_video_id id
+      return find_by_token id
     end
   end
 
   def networks
-    super.group :network_id
+    super.group(:network_id).all
   end
 
-  # def video_id
-  #   video_id_of_url self.link
-  # end
   def swf_link
-    swf_link_of_id self.video_id
+    link_from_token self.token, :swf
   end
   def link
-    link_from_id self.video_id
+    link_from_token self.token
   end
 end

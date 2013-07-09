@@ -22,7 +22,7 @@ class Network < ActiveRecord::Base
 
 
   def videos
-    super.group :video_id
+    super.group(:token).all
   end
 
   def impressions video=nil

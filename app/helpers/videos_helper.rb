@@ -1,28 +1,28 @@
 module VideosHelper
 
-  def id_from_link(url)
+  def token_from_link(url)
     if url[/youtu\.be\/([^\?]*)/]
-      @video_id = $1
+      @token = $1
     else
       # Regex from # http://stackoverflow.com/questions/3452546/javascript-regex-how-to-get-youtube-video-id-from-url/4811367#4811367
       url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
       
-      @video_id = $5
+      @token = $5
     end
 
-    @video_id
+    @token
   end
 
-  def link_from_id(video_id=@video_id)
-    @video_id = video_id
-    "https://www.youtube.com/watch?v=#{@video_id}"
+  def link_from_token(token=@token, type=:link)
+    @token = token
+    return  case type
+            when :swf
+               "//www.youtube.com/v/#{token}?enablejsapi=1&playerapiid=ytplayer&version=3"
+            else
+              "https://www.youtube.com/watch?v=#{@token}"
+            end
   end
 
-  def swf_link_of_id(video_id=@video_id)
-    @video_id = video_id
-    "//www.youtube.com/v/#{video_id}?enablejsapi=1&playerapiid=ytplayer&version=3"
-  end
-  
   # incomplete
   # def embed_code(url, method=:swf)
   #   video_id_of_url url

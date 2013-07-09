@@ -12,17 +12,22 @@
 
 @import "videos";
 
-table{
-  width:100%;
-  margin-bottom: 35px;
-}
-tr{
-  width:100%;
-}
-td, th{
-  text-align: left;
-  padding:2px 6px;
-  vertical-align: middle;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
+// table{
+//   width:100%;
+//   margin-bottom: 35px;
+// }
+// tr{
+//   width:100%;
+// }
+// td, th{
+//   text-align: left;
+//   padding:2px 6px;
+//   vertical-align: middle;
+//   border-bottom: 1px solid rgba(0,0,0,0.1);
+// }
 
+table{
+  @extend .table;
+  @extend .table-bordered;
+  @extend .table-striped;
+}
