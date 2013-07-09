@@ -13,6 +13,7 @@ group :development do
 	gem 'sqlite3'
 end
 
+# gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -32,6 +33,7 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'blank_pixel', git: 'git://github.com/thegillis/blank_pixel.git'
+gem 'uniquify-uuid'
 
 # gem 'zepto-rails', :github => 'frontfoot/zepto-rails'
 

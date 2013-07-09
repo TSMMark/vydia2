@@ -25,6 +25,10 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
 
+    @networks = @video.networks
+
+    @impressions = @video.impressions
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @video }

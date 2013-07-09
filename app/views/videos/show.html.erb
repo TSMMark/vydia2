@@ -1,18 +1,11 @@
-<p>
-  <b>Name:</b>
-  <%= @video.name %>
-</p>
-
+<h2><%= link_to @video.name, @video.link, target: :_blank %></h2>
 <p>
   <b>Video ID:</b>
   <%= @video.video_id %>
 </p>
 
-<p>
-  <b>Link:</b>
-  <%= link_to @video.link, @video.link, target: :_blank %>
-</p>
 
+<%= render @networks %>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

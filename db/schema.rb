@@ -11,7 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709024823) do
+ActiveRecord::Schema.define(:version => 20130709161637) do
+
+  create_table "impressions", :force => true do |t|
+    t.integer  "video_id"
+    t.integer  "network_id"
+    t.string   "ip_address",  :limit => 16
+    t.string   "request_url", :limit => 200
+    t.string   "referer",     :limit => 200
+    t.string   "user_agent",  :limit => 200
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "impressions", ["created_at"], :name => "index_impressions_on_created_at"
+  add_index "impressions", ["ip_address"], :name => "index_impressions_on_ip_address"
+  add_index "impressions", ["network_id"], :name => "index_impressions_on_network_id"
+  add_index "impressions", ["video_id"], :name => "index_impressions_on_video_id"
+
+  create_table "networks", :force => true do |t|
+    t.string   "name"
+    t.string   "token",      :limit => 12
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "networks", ["token"], :name => "index_networks_on_token", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -41,5 +66,6 @@ ActiveRecord::Schema.define(:version => 20130709024823) do
   end
 
   add_index "videos", ["user_id"], :name => "video_user_id_index"
+  add_index "videos", ["video_id"], :name => "index_videos_on_video_id", :unique => true
 
 end

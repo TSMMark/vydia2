@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  video_id: 
+  network_id: 
+  ip_address: MyString
+  request_url: MyString
+  referer: MyString
+  user_agent: MyString
+
+two:
+  video_id: 
+  network_id: 
+  ip_address: MyString
+  request_url: MyString
+  referer: MyString
+  user_agent: MyString

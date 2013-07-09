@@ -8,6 +8,9 @@ class Video < ActiveRecord::Base
   validates_presence_of :name, :video_id
   validates_uniqueness_of :video_id
 
+  has_many :impressions, inverse_of: :video
+  has_many :networks, through: :impressions
+
   # find by internal id or youtube video_id
   def self.find(id)
     if id.numeric?
