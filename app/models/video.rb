@@ -21,7 +21,7 @@ class Video < ActiveRecord::Base
   end
 
   def networks
-    super.group(:network_id).all
+    super.group('networks.token').all
   end
 
   def swf_link
