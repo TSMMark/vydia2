@@ -1,0 +1,27 @@
+
+
+
+
+@import "styles";
+
+// @import "scaffolds";
+
+@import "users";
+
+@import "pages";
+
+@import "videos";
+
+table{
+  width:100%;
+}
+tr{
+  width:100%;
+}
+td, th{
+  text-align: left;
+  padding:2px 6px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+

@@ -11,21 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421154338) do
+ActiveRecord::Schema.define(:version => 20130709161637) do
 
-  create_table "pins", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.integer  "user_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "image_remote_url"
+  create_table "impressions", :force => true do |t|
+    t.integer  "video_id"
+    t.integer  "network_id"
+    t.string   "ip_address",  :limit => 16
+    t.string   "request_url", :limit => 200
+    t.string   "referer",     :limit => 200
+    t.string   "user_agent",  :limit => 200
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
-  add_index "pins", ["user_id"], :name => "index_pins_on_user_id"
+  add_index "impressions", ["created_at"], :name => "index_impressions_on_created_at"
+  add_index "impressions", ["ip_address"], :name => "index_impressions_on_ip_address"
+  add_index "impressions", ["network_id"], :name => "index_impressions_on_network_id"
+  add_index "impressions", ["video_id"], :name => "index_impressions_on_video_id"
+
+  create_table "networks", :force => true do |t|
+    t.string   "name"
+    t.string   "token",      :limit => 12
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "networks", ["token"], :name => "index_networks_on_token", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -46,22 +57,15 @@ ActiveRecord::Schema.define(:version => 20130421154338) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
-  create_table "views", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+  create_table "videos", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "video_id"
   end
 
-  add_index "views", ["email"], :name => "index_views_on_email", :unique => true
-  add_index "views", ["reset_password_token"], :name => "index_views_on_reset_password_token", :unique => true
+  add_index "videos", ["user_id"], :name => "video_user_id_index"
+  add_index "videos", ["video_id"], :name => "index_videos_on_video_id", :unique => true
 
 end

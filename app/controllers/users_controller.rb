@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
-  def show
-  	@user = User.find(params[:id])
-  	@pins = @user.pins.page(params[:page]).per_page(20)
+  
+  def index
+    @users = User.all
+    # raise @users.to_yaml
   end
+
+  def show
+    @user   = User.find(params[:id])
+    @videos = @user.videos
+  end
+
 end

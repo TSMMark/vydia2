@@ -23,3 +23,24 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+
+
+# PostgreSQL
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: vydia2_development
+#   pool: 5
+#   username: mark
+#   password: 
+
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: vydia2_test
+#   pool: 5
+#   username: mark
+#   password: 
+
+
