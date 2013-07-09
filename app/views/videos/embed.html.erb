@@ -12,11 +12,11 @@
 <script type="text/javascript">
   var player;
   function onytplayerStateChange(newState) {
-     alert("Player's new state: " + newState);
+     window.console && console.log("Player's new state: " + newState);
   }
 
   window.player_ready = function(playerId) {
-    alert("ready: " + playerId);
+    window.console && console.log("ready: " + playerId);
     player = document.getElementById("flash");
     player.addEventListener("onStateChange", "onytplayerStateChange");
   }
@@ -26,6 +26,7 @@
 <script type="text/javascript" language="javascript">
   var flashvars = {};
   var params = {
+    allowFullScreen:   "true",
     allowScriptAccess: "always"
   };
   var attributes = {
