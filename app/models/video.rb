@@ -20,6 +20,10 @@ class Video < ActiveRecord::Base
     end
   end
 
+  def networks
+    super.group :network_id
+  end
+
   # def video_id
   #   video_id_of_url self.link
   # end

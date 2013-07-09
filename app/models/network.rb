@@ -20,4 +20,18 @@ class Network < ActiveRecord::Base
     end
   end
 
+
+  def videos
+    super.group :video_id
+  end
+
+  def impressions video=nil
+    impressions = super
+    impressions.where video_id: video.id if video
+  end
+
+  def count_impressions video=nil
+    self.impressions(video).count
+  end
+
 end
