@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>YouTube ID</th>
     <th>Link</th>
     <th></th>
     <th></th>
@@ -12,7 +13,8 @@
 <% @videos.each do |video| %>
   <tr>
     <td><%= video.name %></td>
-    <td><%= link_to 'link', video.video_id, target: :_blank %></td>
+    <td><%= video.video_id%></td>
+    <td><%= link_to 'link', video.link, target: :_blank %></td>
     <td><%= link_to 'Show', video %></td>
     <td><%= link_to 'Edit', edit_video_path(video) %></td>
     <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>

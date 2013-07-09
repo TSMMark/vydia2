@@ -6,6 +6,16 @@ class Video < ActiveRecord::Base
   belongs_to :user, inverse_of: :videos
 
   validates_presence_of :name, :video_id
+  validates_uniqueness_of :video_id
+
+  # find by internal id or youtube video_id
+  def self.find(id)
+    if id.numeric?
+      return super id
+    else
+      return find_by_video_id id
+    end
+  end
 
   # def video_id
   #   video_id_of_url self.link
