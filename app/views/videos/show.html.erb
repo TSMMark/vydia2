@@ -4,8 +4,13 @@
 </p>
 
 <p>
+  <b>Video ID:</b>
+  <%= @video.video_id %>
+</p>
+
+<p>
   <b>Link:</b>
-  <%= @video.link %>
+  <%= link_to @video.link, @video.link, target: :_blank %>
 </p>
 
 

@@ -1,9 +1,11 @@
 class VideosController < ApplicationController
+  include VideosHelper
 
   def embed
     @video  = Video.find(params[:id])
     # @blog   = Blog.find params[:player]
     @blog   = params[:player]
+
     render layout: 'layouts/app_embed'
   end
 
@@ -42,7 +44,9 @@ class VideosController < ApplicationController
 
   # GET /videos/1/edit
   def edit
-    @video = Video.find(params[:id])
+    @video = Video.find(params[:id]) do |v|
+      v.video_id = link_from_id v.video_id
+    end
   end
 
   # POST /videos
@@ -50,6 +54,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(params[:video]) do |v|
       v.user = current_user
+      v.video_id = id_from_link v.video_id
     end
 
     respond_to do |format|
