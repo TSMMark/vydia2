@@ -10,7 +10,7 @@
       </a>
  
       <!-- Be sure to leave the brand out there if you want it shown -->
-      <%=link_to "One Month Rails", root_path, class: "brand" %>
+      <%=link_to "Vydia Ads", root_path, class: "brand" %>
  
       <!-- Everything you want hidden at 940px or less, place within here -->
       <div class="nav-collapse collapse">
@@ -21,17 +21,17 @@
         </ul>
 
         <ul class="nav pull-right">
+          <li>
+            <%= link_to "Add Video", new_video_path %>
+          </li>
           <% if user_signed_in? %>
-            <li>
-              <%= link_to "Add +", new_pin_path %>
-            </li>
-            <li>
+            <!-- <li>
               <%= link_to "Edit Profile", edit_user_registration_path %>
-            </li>
+            </li> -->
             <li>
               <%= link_to "Logout", destroy_user_session_path, method: :delete %>
             </li>
-            <% else %>
+          <% else %>
             <li>
               <%= link_to "Login", new_user_session_path %>
             </li>

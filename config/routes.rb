@@ -1,15 +1,18 @@
 Omrails::Application.routes.draw do
+  
+  get 'videos/:id/embed/:player' => 'videos#embed'
+  resources :videos
+
+
   get "users/show"
 
-  resources :pins
+  # resources :pins
 
-
-  devise_for :views
 
   devise_for :users
   match 'users/:id' => 'users#show', as: :user
 
-  root :to    => 'pins#index'
+  root :to    => 'users#index'
 
   get 'about' => 'pages#about'
 
