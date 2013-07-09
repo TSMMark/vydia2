@@ -1,11 +1,12 @@
 Omrails::Application.routes.draw do
   
+
   resources :networks
 
 
-  get 't/:id/:player' => 'tracker#pixel'
+  get 't/:id/:network_id' => 'tracker#pixel'
 
-  get 'videos/:id/embed/:player' => 'videos#embed'
+  get 'videos/:id/embed/:network_id' => 'videos#embed'
   resources :videos
 
 
