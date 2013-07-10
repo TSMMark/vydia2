@@ -1,5 +1,5 @@
 <h4>Featured on:</h4>
-<% unless @networks.empty? %>
+<% unless @networks.blank? %>
   <table class="table">
     <tr>
       <th>Network</th>
@@ -10,7 +10,7 @@
 
     <% @networks.each do |n| %>
       <tr>
-        <td><%= n.name %></td>
+        <td><%= link_to_network n %></td>
         <td><%= n.count_impressions(@video) %></td>
         <td></td>
         <td></td>

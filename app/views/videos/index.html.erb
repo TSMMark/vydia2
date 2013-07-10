@@ -1,26 +1,6 @@
 <h1>Listing videos</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>YouTube Token</th>
-    <th>Link</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @videos.each do |video| %>
-  <tr>
-    <td><%= video.name %></td>
-    <td><%= video.token%></td>
-    <td><%= link_to 'link', video.link, target: :_blank %></td>
-    <td><%= link_to 'Show', video %></td>
-    <td><%= link_to 'Edit', edit_video_path(video) %></td>
-    <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<%= render 'videos' %>
 
 <br />
 

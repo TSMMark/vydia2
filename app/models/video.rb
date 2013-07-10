@@ -13,7 +13,7 @@ class Video < ActiveRecord::Base
 
   # find by internal id or youtube token
   def self.find(id)
-    if id.numeric?
+    if !id || id.numeric?
       return super id
     else
       return find_by_token id

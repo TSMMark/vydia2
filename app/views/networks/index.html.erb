@@ -1,26 +1,6 @@
 <h1>Listing networks</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Token</th>
-    <th>Total Videos</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @networks.each do |network| %>
-  <tr>
-    <td><%= network.name %></td>
-    <td><%= network.token %></td>
-    <td><%= network.videos.count %></td>
-    <td><%= link_to 'Show', network %></td>
-    <td><%= link_to 'Edit', edit_network_path(network) %></td>
-    <td><%= link_to 'Destroy', network, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<%= render 'networks' %>
 
 <br />
 

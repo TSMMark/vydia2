@@ -13,7 +13,11 @@ class NetworksController < ApplicationController
   # GET /networks/1
   # GET /networks/1.json
   def show
-    @network = Network.find(params[:id])
+    @network  = Network.find(params[:id])
+
+    @videos   = @network.videos
+
+    @impressions = @network.impressions
 
     respond_to do |format|
       format.html # show.html.erb
