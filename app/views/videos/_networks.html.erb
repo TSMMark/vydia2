@@ -1,17 +1,22 @@
-<table>
-  <tr>
-    <th>Network</th>
-    <th>Impressions</th>
-    <th>Views</th>
-    <th>Royalties</th>
-  </tr>
-
-  <% @networks.each do |n| %>
+<h4>Featured on:</h4>
+<% unless @networks.empty? %>
+  <table class="table">
     <tr>
-      <td><%= n.name %></td>
-      <td><%= n.count_impressions(@video) %></td>
-      <td></td>
-      <td></td>
+      <th>Network</th>
+      <th>Impressions</th>
+      <th>Views</th>
+      <th>Royalties</th>
     </tr>
-  <% end %>
-</table>
+
+    <% @networks.each do |n| %>
+      <tr>
+        <td><%= n.name %></td>
+        <td><%= n.count_impressions(@video) %></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>This video has no network impressions</p>
+<% end %>

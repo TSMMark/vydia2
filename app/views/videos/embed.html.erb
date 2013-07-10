@@ -12,7 +12,11 @@
 <script type="text/javascript">
   var player;
   function onytplayerStateChange(newState) {
-     window.console && console.log("Player's new state: " + newState);
+    window.console && console.log("Player's new state: " + newState);
+    switch(newState){
+      case 0:
+
+    }
   }
 
   window.player_ready = function(playerId) {
@@ -24,16 +28,18 @@
 
 
 <script type="text/javascript" language="javascript">
-  var flashvars = {};
-  var params = {
-    allowFullScreen:   "true",
-    allowScriptAccess: "always"
-  };
-  var attributes = {
-    'id':     "flash",
-    'align':  "middle"
-  };
-  swfobject.embedSWF("<%= @video.swf_link %>", "player", "100%", "100%", "9.0.0", "/assets/expressInstall.swf", flashvars, params, attributes);
+  (function(el_id){
+    var flashvars = {};
+    var params = {
+      allowFullScreen:   "true",
+      allowScriptAccess: "always"
+    };
+    var attributes = {
+      'id':     "flash",
+      'align':  "middle"
+    };
+    swfobject.embedSWF("<%= @video.swf_link %>", el_id, "100%", "100%", "9.0.0", "/assets/expressInstall.swf", flashvars, params, attributes);
+  }("player"));
 </script>
 
 <script type="text/javascript" language="javascript">

@@ -58,14 +58,14 @@ ActiveRecord::Schema.define(:version => 20130709161637) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
+    t.string   "token"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.string   "video_id"
   end
 
+  add_index "videos", ["token"], :name => "index_videos_on_token", :unique => true
   add_index "videos", ["user_id"], :name => "video_user_id_index"
-  add_index "videos", ["video_id"], :name => "index_videos_on_video_id", :unique => true
 
 end

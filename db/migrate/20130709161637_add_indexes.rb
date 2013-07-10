@@ -1,6 +1,6 @@
 class AddIndexes < ActiveRecord::Migration
   def change
-    add_index :videos, :video_id, :unique => true
+    add_index :videos, :token, :unique => true
 
     add_index :networks, :token, :unique => true
 

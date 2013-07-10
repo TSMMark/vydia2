@@ -2,7 +2,7 @@ class TrackerController < ApplicationController
 
   def pixel
     @video      = Video.find params[:id]
-    @network    = Network.find params[:player]
+    @network    = Network.find params[:network_id]
 
     ip_address  = request.remote_ip
 
