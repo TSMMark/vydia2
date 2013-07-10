@@ -25,6 +25,7 @@ class TrackerController < ApplicationController
       
       @impression.save!
     end
+    
     render_blank_pixel
   end
 

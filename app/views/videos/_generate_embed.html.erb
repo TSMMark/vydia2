@@ -10,7 +10,7 @@
 </script>
 
 <div class="generated-code-container">
-  <textarea></textarea>
+  <textarea style="display:none;"></textarea>
 </div>
 
 
@@ -25,7 +25,10 @@
       var network_token = generator.val();
       var embed_code    = '';
       if(network_token != 0){
+        code_container.show();
         embed_code = Helper.embed_code("<%= @video.token %>", network_token);
+      }else{
+        code_container.hide();
       }
       return code_container.val(
         embed_code
