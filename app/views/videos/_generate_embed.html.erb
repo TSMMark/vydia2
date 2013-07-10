@@ -1,0 +1,40 @@
+<% @networks = Network.all %>
+<select class="embed-code-generator">
+  <option value="0">--Select a Network--</option>
+  <% @networks.each do |n| %>
+    <option value="<%= n.token %>"><%= n.name %></option>
+  <% end %>
+</select>
+
+<script type="text/javascript">
+</script>
+
+<div class="generated-code-container">
+  <textarea style="display:none;"></textarea>
+</div>
+
+
+<script type="text/javascript">
+  $(function() {
+    var generator, code_container;
+
+    generator       = $(".embed-code-generator");
+    code_container  = $(".generated-code-container textarea");
+
+    generator.on('change', function() {
+      var network_token = generator.val();
+      var embed_code    = '';
+      if(network_token != 0){
+        code_container.show();
+        embed_code = Helper.embed_code("<%= @video.token %>", network_token);
+      }else{
+        code_container.hide();
+      }
+      return code_container.val(
+        embed_code
+      );
+    });
+
+    code_container.selectOnFocus();
+  });
+</script>

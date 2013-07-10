@@ -1,1 +1,2 @@
 //= require swfobject
+//= require jquery

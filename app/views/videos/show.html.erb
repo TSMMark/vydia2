@@ -5,7 +5,12 @@
 </p>
 
 
-<%= render 'videos/networks' %>
+<%= render 'networks' %>
+
+<h5>Generate Embed Code</h5>
+<div>
+  <%= render 'generate_embed' %>
+</div>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

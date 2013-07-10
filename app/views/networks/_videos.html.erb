@@ -1,0 +1,22 @@
+<h4>Features:</h4>
+<% unless @videos.blank? %>
+  <table class="table">
+    <tr>
+      <th>Video</th>
+      <th>Impressions</th>
+      <th>Views</th>
+      <th>Royalties</th>
+    </tr>
+
+    <% @videos.each do |v| %>
+      <tr>
+        <td><%= link_to_video v %></td>
+        <td><%= @network.count_impressions(v) %></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>This network has no video features</p>
+<% end %>

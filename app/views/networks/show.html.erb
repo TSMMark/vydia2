@@ -1,14 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @network.name %>
-</p>
+<h2><%= @network.name %></h2>
 
 <p>
   <b>Token:</b>
   <%= @network.token %>
 </p>
+
+<%= render 'videos' %>
 
 
 <%= link_to 'Edit', edit_network_path(@network) %> |

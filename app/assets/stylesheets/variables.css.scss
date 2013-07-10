@@ -1,0 +1,113 @@
+$off-white:                       whitesmoke;
+$darker-text:                     #111;
+$dark-text:                       #333;
+
+
+
+// $btnPrimaryBackground:      green;
+// $navbarBackgroundHighlight: #333;
+// $navbarBackground:          black;
+// $navbarText:                whitesmoke;
+// $navbarLinkColor:           whitesmoke;
+// $navbarLinkColorHover:      white;
+// $navbarLinkColorActive:     #CCC;
+// $navbarBrandColor:          white;
+
+
+@function light($color){
+  @return rgba($color, 0.3);
+}
+@function lighter($color){
+  @return rgba($color, 0.2);
+}
+@function lightest($color){
+  @return rgba($color, 0.1);
+}
+
+
+$green:                           rgb(69,   146,  52);
+$red:                             rgb(203,  44,   42);
+$blue:                            rgb(28,   154,  222);
+$yellow:                          rgb(246,  238,  0);
+$orange:                          rgb(232,  172,  0);
+$pink:                            rgb(229,  0,    124);
+$purple:                          rgb(69,   50,   91);
+
+$icon-color:                      $purple;
+
+$bodyBackground:                  $off-white;
+$textColor:                       $dark-text;
+$linkColor:                       $blue;
+// $linkColorHover:                  ;
+// $iconSpritePath:                  ;
+// $iconWhiteSpritePath:             ;
+// $gridColumns:                     ;
+// $gridColumnWidth:                 ;
+// $gridGutterWidth:                 ;
+// $gridColumnWidth:                 ;
+// $gridGutterWidth:                 ;
+// $gridColumnWidth:                 ;
+// $gridGutterWidth:                 ;
+// $sansFontFamily:                  ;
+// $serifFontFamily:                 ;
+// $monoFontFamily:                  ;
+// $baseFontSize:                    ;
+// $baseFontFamily:                  ;
+// $baseLineHeight:                  ;
+// $altFontFamily:                   ;
+// $headingsFontFamily:              ;
+// $headingsFontWeight:              ;
+$headingsColor:                   $dark-text;
+// $fontSizeLarge:                   ;
+// $fontSizeSmall:                   ;
+// $fontSizeMini:                    ;
+// $paddingLarge:                    ;
+// $paddingSmall:                    ;
+// $paddingMini:                     ;
+// $baseBorderRadius:                ;
+// $borderRadiusLarge:               ;
+// $borderRadiusSmall:               ;
+// $heroUnitBackground:              ;
+// $heroUnitHeadingColor:            ;
+// $heroUnitLeadColor:               ;
+$tableBackground:                 lightest($blue);
+$tableBackgroundAccent:           lighter($blue);
+$tableBackgroundHover:            light($blue);
+$tableBorder:                     $blue;
+// $placeholderText:                 ;
+// $inputBackground:                 ;
+// $inputBorder:                     ;
+// $inputBorderRadius:               ;
+// $inputDisabledBackground:         ;
+// $formActionsBackground:           ;
+// $btnPrimaryBackground:            ;
+// $btnPrimaryBackgroundHighlight:   ;
+// $warningText:                     ;
+// $warningBackground:               ;
+// $errorText:                       ;
+// $errorBackground:                 ;
+// $successText:                     ;
+// $successBackground:               ;
+// $infoText:                        ;
+// $infoBackground:                  ;
+// $navbarHeight:                    ;
+// $navbarBackground:                $red;
+// $navbarBackgroundHighlight:       black;
+// $navbarText:                      ;
+// $navbarBrandColor:                ;
+// $navbarLinkColor:                 ;
+// $navbarLinkColorHover:            ;
+// $navbarLinkColorActive:           ;
+// $navbarLinkBackgroundHover:       ;
+// $navbarLinkBackgroundActive:      ;
+// $navbarSearchBackground:          ;
+// $navbarSearchBackgroundFocus:     ;
+// $navbarSearchBorder:              ;
+// $navbarSearchPlaceholderColor:    ;
+// $navbarCollapseWidth:             ;
+// $navbarCollapseDesktopWidth:      ;
+// $dropdownBackground:              ;
+// $dropdownBorder:                  ;
+// $dropdownLinkColor:               ;
+// $dropdownLinkColorHover:          ;
+// $dropdownLinkBackgroundHover:     ;

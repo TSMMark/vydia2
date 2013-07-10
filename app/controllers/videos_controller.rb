@@ -2,9 +2,9 @@ class VideosController < ApplicationController
   include VideosHelper
 
   def embed
-    @video    = Video.find params[:id]
+    @video    = params[:id] && Video.find(params[:id])
     # @blog   = Blog.find params[:player]
-    @network  = Network.find params[:network_id]
+    @network  = params[:network_id] && Network.find(params[:network_id])
 
     if @video && @network
       render layout: 'layouts/app_embed'

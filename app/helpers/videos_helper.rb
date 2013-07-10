@@ -1,5 +1,9 @@
 module VideosHelper
 
+  def link_to_video obj
+    link_to obj.name, video_url(obj)
+  end
+
   def token_from_link(url)
     if url[/youtu\.be\/([^\?]*)/]
       @token = $1
