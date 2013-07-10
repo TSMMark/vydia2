@@ -53,9 +53,9 @@ class VideosController < ApplicationController
 
   # GET /videos/1/edit
   def edit
-    @video = Video.find(params[:id]) do |v|
-      v.token = link_from_token v.token
-    end
+    @video = Video.find(params[:id])
+    @video.token = link_from_token @video.token
+    
   end
 
   # POST /videos
