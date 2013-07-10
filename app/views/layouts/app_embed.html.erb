@@ -11,7 +11,7 @@
 		
 		<%= yield %>
 
-		<%= tracking_pixel @video, @network, style: 'position:absolute; left:-999px' %>
+		<%= tracking_pixel @video, @network, :impression %>
 
 	</body>
 </html>
