@@ -1,5 +1,12 @@
 class TrackerController < ApplicationController
 
+  before_filter :default_format
+  def default_format
+    request.format = "json" unless params[:format]
+  end
+
+  respond_to :html, :json
+
   def pixel
     @video      = Video.find params[:id]
     @network    = Network.find params[:network_id]
@@ -18,17 +25,16 @@ class TrackerController < ApplicationController
       
       @impression.save!
     end
-
-    # @request = {
-    #   referer:      request.env['HTTP_REFERER'],
-    #   user_agent:   request.env['HTTP_USER_AGENT'],
-    #   request_url:  request.env['REQUEST_URI'],
-    #   ip_address:   request.remote_ip
-    # }
-
-    # @request.ryaml
-
     render_blank_pixel
+  end
+
+  def view
+    @video    = Video.find params[:id]
+    @network  = Network.find params[:network_id]
+
+    respond_with @video
+
+
   end
 
 end

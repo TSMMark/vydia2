@@ -10,12 +10,20 @@
 
 <!-- event listeners -->
 <script type="text/javascript">
+  window.embed = {
+    "video"   : "<%= @video.token %>",
+    "network" : "<%= @network.token %>"
+  };
+
   var player;
   function onytplayerStateChange(newState) {
     window.console && console.log("Player's new state: " + newState);
     switch(newState){
       case 0:
-
+        alert("play complete");
+        $.post('/v/<%= @video.token %>/<%= @network.token %>', function(data){
+          window.console && console.log("view",data);
+        });
     }
   }
 
