@@ -24,6 +24,18 @@ class Video < ActiveRecord::Base
     super.group('networks.id').all
   end
 
+  def impressions network=nil
+    impressions = super
+    impressions = impressions.where network_id: network.id if network
+    impressions
+  end
+
+  def count_impressions network=nil, o={}
+    i = self.impressions(network)
+    i = i.select('DISTINCT network_id, ip_address') unless o[:all]
+    i.all.count
+  end
+
   def swf_link
     link_from_token self.token, :swf
   end

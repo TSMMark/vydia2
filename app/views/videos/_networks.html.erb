@@ -3,6 +3,7 @@
   <table class="table">
     <tr>
       <th>Network</th>
+      <th>Unique Impressions</th>
       <th>Impressions</th>
       <th>Views</th>
       <th>Royalties</th>
@@ -12,6 +13,7 @@
       <tr>
         <td><%= link_to_network n %></td>
         <td><%= n.count_impressions(@video) %></td>
+        <td><%= n.count_impressions(@video, all: true) %></td>
         <td></td>
         <td></td>
       </tr>

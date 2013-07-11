@@ -7,22 +7,22 @@ class TrackerController < ApplicationController
   before_filter :existing_impression
 
   def impression
-    if @impression.blank?
-      @video      = Video.find params[:id]
-      @network    = Network.find params[:network_id]
+    # if @impression.blank?
+    # end
+    @video      = Video.find params[:id]
+    @network    = Network.find params[:network_id]
 
-      if @video && @network then
-        @impression = Impression.new do |imp|
-          imp.video_id    = @video.id
-          imp.network_id  = @network.id
-          imp.ip_address  = @ip_address
-          imp.request_url = request.env['REQUEST_URI']
-          imp.referer     = request.env['HTTP_REFERER']
-          imp.user_agent  = request.env['HTTP_USER_AGENT']
-        end 
-        
-        @impression.save!
-      end
+    if @video && @network then
+      @impression = Impression.new do |imp|
+        imp.video_id    = @video.id
+        imp.network_id  = @network.id
+        imp.ip_address  = @ip_address
+        imp.request_url = request.env['REQUEST_URI']
+        imp.referer     = request.env['HTTP_REFERER']
+        imp.user_agent  = request.env['HTTP_USER_AGENT']
+      end 
+      
+      @impression.save!
     end
     
     render_blank_pixel

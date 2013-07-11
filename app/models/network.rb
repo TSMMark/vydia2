@@ -27,11 +27,14 @@ class Network < ActiveRecord::Base
 
   def impressions video=nil
     impressions = super
-    impressions.where video_id: video.id if video
+    impressions = impressions.where video_id: video.id if video
+    impressions
   end
 
-  def count_impressions video=nil
-    self.impressions(video).count
+  def count_impressions video=nil, o={}
+    i = self.impressions(video)
+    i = i.select('DISTINCT video_id, ip_address') unless o[:all]
+    i.all.count
   end
 
 end
