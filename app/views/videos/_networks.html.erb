@@ -5,7 +5,8 @@
       <th>Network</th>
       <th>Unique Impressions</th>
       <th>Impressions</th>
-      <th>Views</th>
+      <th>Unique Plays</th>
+      <th>Plays</th>
       <th>Royalties</th>
     </tr>
 
@@ -14,7 +15,8 @@
         <td><%= link_to_network n %></td>
         <td><%= n.count_impressions(@video) %></td>
         <td><%= n.count_impressions(@video, all: true) %></td>
-        <td></td>
+        <td><%= n.count_plays(@video) %></td>
+        <td><%= n.count_plays(@video, all: true) %></td>
         <td></td>
       </tr>
     <% end %>

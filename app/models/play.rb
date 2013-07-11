@@ -2,7 +2,7 @@ class Play < ActiveRecord::Base
   attr_accessible :impression_id, :seconds_passed
 
   belongs_to :impression, inverse_of: :play
-
+  
   def self.generate impression
     p = impression.play
     if !p

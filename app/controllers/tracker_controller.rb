@@ -61,7 +61,7 @@ class TrackerController < ApplicationController
         video_id:   @video.id,
         network_id: @network.id,
         ip_address: @ip_address
-      ).limit(1).last
+      ).last
     else
       @impression = nil
     end
