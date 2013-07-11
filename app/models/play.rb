@@ -1,5 +1,6 @@
 class Play < ActiveRecord::Base
-  attr_accessible :impression_id, :seconds_passed
+
+  attr_accessible :impression_id, :seconds_passed, :state
 
   belongs_to :impression, inverse_of: :play
   
@@ -13,4 +14,5 @@ class Play < ActiveRecord::Base
     end
     p
   end
+
 end
