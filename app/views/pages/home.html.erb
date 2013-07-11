@@ -5,7 +5,7 @@
   <h1>Welcome back, <%= current_user.name %></h1>
   <p></p>
   <h3 style="margin-top: 50px;">I want to see...</h3>
-  <p style="text-align: left;">
+  <p  style="text-align: left;">
     <%=link_to "Videos", videos_path, class: "btn btn-primary btn-large btn-danger"%>
     <%=link_to "Networks", networks_path, class: "btn btn-primary btn-large btn-success"%>
   </p>
@@ -14,9 +14,9 @@
 <% else %>
 
 
-	<h1>Welcome to Vydia2!</h1>
+	<h1>Welcome to Vydia Ads!</h1>
 	<p>
-		Calculate video impressions and plays seperated by blog
+		The <strong>only</strong> way to create and monitor video virality.
 	</p>
 	<p>
 		<%=link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-large"%>

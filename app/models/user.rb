@@ -11,4 +11,15 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :videos, inverse_of: :user
+
+
+  validate :is_trendsetter
+
+
+  private
+  def is_trendsetter
+    errors.add(:email, "No access.") unless
+      (self.email =~ /.+@trendsettermarketing\.net/)
+  end
+
 end
