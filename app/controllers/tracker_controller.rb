@@ -30,7 +30,8 @@ class TrackerController < ApplicationController
 
   def view
     unless @impression.blank?
-
+      @impression.play = Play.generate @impression
+      @impression.save
     end
 
     render_blank_pixel

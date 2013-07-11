@@ -6,6 +6,8 @@ class Impression < ActiveRecord::Base
 
   validates_presence_of :video_id, :network_id
 
+  has_one :play, inverse_of: :impression
+
   # only one of IP
   # validates_uniqueness_of :ip_address, :scope => [:network_id, :video_id]
   
