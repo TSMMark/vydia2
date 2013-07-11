@@ -7,11 +7,6 @@ class TrackerController < ApplicationController
   before_filter :existing_impression
 
   def impression
-    # if @impression.blank?
-    # end
-    @video      = Video.find_by_token params[:id]
-    @network    = Network.find_by_token params[:network_id]
-
     if @video && @network then
       @impression = Impression.new do |imp|
         imp.video_id    = @video.id

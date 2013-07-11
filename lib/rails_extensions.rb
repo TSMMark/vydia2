@@ -12,6 +12,20 @@ module RailsExtensions
     def nonnegative_integer?
       self.to_i > 0 or self == '0'
     end
+
+    # parameters / arguments
+    def cgi_escape!
+      # self._replace_all! CGI::escape(self)
+      self._replace_all! self.cgi_escape
+    end
+    def cgi_escape
+      CGI::escape self
+    end
+    def _replace_all! s
+      self.gsub! /(.+)/, s
+      self
+    end
+
   end
 
   class ::Symbol
