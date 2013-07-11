@@ -13,4 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+//  
+//= require jq_addons
+//  
+//= require variables
+//= require helpers
+//  
+//  
+//  require_tree .

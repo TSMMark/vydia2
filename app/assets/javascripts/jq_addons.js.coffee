@@ -1,3 +1,10 @@
+window.console ||=
+  log:(->)
+  info:(->)
+  debug:(->)
+  warn:(->)
+  error:(->)
+
 $.fn.selectOnFocus = ->
   @each ->
     $$ = $ @
