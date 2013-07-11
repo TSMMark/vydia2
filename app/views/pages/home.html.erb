@@ -1,0 +1,29 @@
+<div class="hero-unit">
+
+<% if user_signed_in? %>
+  
+  <h1>Welcome back, <%= current_user.name %></h1>
+
+  
+  <h3 style="margin-top: 50px;">I want to see...</h3>
+  <p  style="text-align: left;">
+    <%=link_to "Videos", videos_path, class: "btn btn-large btn-videos"%>
+    <%=link_to "Networks", networks_path, class: "btn btn-large btn-networks"%>
+  </p>
+
+
+<% else %>
+
+
+	<h1>Welcome to Vydia!</h1>
+	<p>
+		The <strong>only</strong> way to create and monitor video virality.
+	</p>
+	<p>
+		<%=link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-large"%>
+	</p>
+
+
+<% end %>
+
+</div>

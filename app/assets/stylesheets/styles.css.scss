@@ -11,6 +11,12 @@ body {
 
 @import 'bootstrap-responsive';
 
+table{
+  @extend .table;
+  @extend .table-bordered;
+  @extend .table-striped;
+}
+
 .hero-unit{
 	padding:60px 5%;
 }
@@ -34,3 +40,15 @@ a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
   color: $icon-color;
 }
 
+.btn-red{
+  @extend .btn-danger;
+}
+.btn-green{
+  @extend .btn-success;
+}
+.btn-videos{
+  @extend .btn-red;
+}
+.btn-networks{
+  @extend .btn-green;
+}

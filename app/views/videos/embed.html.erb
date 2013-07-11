@@ -1,60 +1,12 @@
 <div id="player"></div>
 
 <script type="text/javascript">
-// load youtube api
-var t = document.createElement('script');
-t.src = "//www.youtube.com/iframe_api";
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(t, s);
+  window.Embed = window.Embed || {};
+  window.Embed["video"]         = "<%= @video.token %>";
+  window.Embed["network"]       = "<%= @network.token %>";
+  window.Embed["tracking_url"]  = "<%= tracking_url @video, @network, :view %>";
+  window.Embed["player_id"]     = "player";
+  window.Embed["player"]        = null;
 </script>
-
-<!-- event listeners -->
-<script type="text/javascript">
-  window.embed = {
-    "video"   : "<%= @video.token %>",
-    "network" : "<%= @network.token %>"
-  };
-  var player_id   = 'player';
-  var player;
-
-  function onPlayerReady(playerId){
-    window.player_ready && window.player_ready(playerId);
-    window.player_is_ready  = true;
-  };
-
-  function onPlayerStateChange(newState){
-    window.console && console.log(newState);
-    switch(newState.data){
-      case 0:
-        play_complete();
-        break;
-    }
-  };
-
-  function onYouTubeIframeAPIReady(){
-    player = new YT.Player(player_id ,{
-      height:   '100%',
-      width:    '100%',
-      videoId:  embed.video,
-      events:   {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  };
-
-  function play_complete(){
-    var src = "<%= tracking_url @video, @network, :view %>";
-    var f   = document.getElementsByTagName('img')[0];
-    
-    // don't add if already there
-    if(f.src.indexOf(src) !== -1) return false;
-
-    var i = document.createElement('img');
-    i.src = src;
-    f.parentNode.insertBefore(i, f);
-  };
-</script>
-
 
 

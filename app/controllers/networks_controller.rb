@@ -1,4 +1,4 @@
-class NetworksController < ApplicationController
+class NetworksController < BaseAuthController
   # GET /networks
   # GET /networks.json
   def index
