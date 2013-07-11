@@ -1,13 +1,12 @@
 <div id="player"></div>
 
 <script type="text/javascript">
-  window.Embed = {
-    "video"         : "<%= @video.token %>",
-    "network"       : "<%= @network.token %>",
-    "tracking_url"  : "<%= tracking_url @video, @network, :view %>",
-    "player_id"     : "player",
-    "player"        : null
-  };
+  window.Embed = window.Embed || {};
+  window.Embed["video"]         = "<%= @video.token %>";
+  window.Embed["network"]       = "<%= @network.token %>";
+  window.Embed["tracking_url"]  = "<%= tracking_url @video, @network, :view %>";
+  window.Embed["player_id"]     = "player";
+  window.Embed["player"]        = null;
 </script>
 
 

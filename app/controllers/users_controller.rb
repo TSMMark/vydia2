@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  
+class UsersController < BaseAuthController
+
   def index
     @users = User.all
     # raise @users.to_yaml

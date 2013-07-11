@@ -10,18 +10,20 @@ Omrails::Application.routes.draw do
   get 'videos/:id/embed(/:network_id)' => 'videos#embed'
   resources :videos
 
-
-  get "users/show"
-
   # resources :pins
 
 
   devise_for :users
   match 'users/:id' => 'users#show', as: :user
 
-  root :to    => 'users#index'
+  root :to    => 'pages#home'
 
+  get 'home'  => 'pages#home'
   get 'about' => 'pages#about'
+
+
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

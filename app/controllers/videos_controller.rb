@@ -1,6 +1,8 @@
-class VideosController < ApplicationController
+class VideosController < BaseAuthController
   include VideosHelper
 
+  skip_before_filter :verify_login, only: :embed
+  
   def embed
     @video    = params[:id] && Video.find(params[:id])
     # @blog   = Blog.find params[:player]
