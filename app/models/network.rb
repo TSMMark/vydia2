@@ -4,7 +4,11 @@ class Network < ActiveRecord::Base
   validates_presence_of :name
 
   uniquify :token do
-    SecureRandom.uuid.split('-').first
+    all_numbers = /^[0-9]+$/
+    begin
+      token = SecureRandom.uuid.split('-').first
+    end while token =~ all_numbers
+    token
   end
 
   has_many :impressions, inverse_of: :network

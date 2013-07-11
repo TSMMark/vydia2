@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711012721) do
+ActiveRecord::Schema.define(:version => 20130711192340) do
 
   create_table "impressions", :force => true do |t|
     t.integer  "video_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130711012721) do
     t.integer  "seconds_passed"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "state"
   end
 
   create_table "users", :force => true do |t|
