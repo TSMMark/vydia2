@@ -15,4 +15,8 @@ class Play < ActiveRecord::Base
     p
   end
 
+  def state
+    super
+  end
+
 end
