@@ -3,11 +3,12 @@
 <% if user_signed_in? %>
   
   <h1>Welcome back, <%= current_user.name %></h1>
-  <p></p>
+
+  
   <h3 style="margin-top: 50px;">I want to see...</h3>
   <p  style="text-align: left;">
-    <%=link_to "Videos", videos_path, class: "btn btn-primary btn-large btn-danger"%>
-    <%=link_to "Networks", networks_path, class: "btn btn-primary btn-large btn-success"%>
+    <%=link_to "Videos", videos_path, class: "btn btn-large btn-videos"%>
+    <%=link_to "Networks", networks_path, class: "btn btn-large btn-networks"%>
   </p>
 
 
