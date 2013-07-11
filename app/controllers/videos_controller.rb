@@ -4,9 +4,9 @@ class VideosController < BaseAuthController
   skip_before_filter :verify_login, only: :embed
   
   def embed
-    @video    = params[:id] && Video.find(params[:id])
+    @video    = params[:id] && Video.find_by_token(params[:id])
     # @blog   = Blog.find params[:player]
-    @network  = params[:network_id] && Network.find(params[:network_id])
+    @network  = params[:network_id] && Network.find_by_token(params[:network_id])
 
     if @video && @network
       render layout: 'layouts/app_embed'
