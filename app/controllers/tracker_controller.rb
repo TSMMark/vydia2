@@ -9,8 +9,8 @@ class TrackerController < ApplicationController
   def impression
     # if @impression.blank?
     # end
-    @video      = Video.find params[:id]
-    @network    = Network.find params[:network_id]
+    @video      = Video.find_by_token params[:id]
+    @network    = Network.find_by_token params[:network_id]
 
     if @video && @network then
       @impression = Impression.new do |imp|
@@ -51,8 +51,8 @@ class TrackerController < ApplicationController
   end
 
   def load_resources
-    @video      = Video.find params[:id]
-    @network    = Network.find params[:network_id]
+    @video      = Video.find_by_token params[:id]
+    @network    = Network.find_by_token params[:network_id]
   end
 
   def existing_impression
