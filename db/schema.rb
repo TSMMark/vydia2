@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709161637) do
+ActiveRecord::Schema.define(:version => 20130711012721) do
 
   create_table "impressions", :force => true do |t|
     t.integer  "video_id"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(:version => 20130709161637) do
   end
 
   add_index "networks", ["token"], :name => "index_networks_on_token", :unique => true
+
+  create_table "plays", :force => true do |t|
+    t.integer  "impression_id"
+    t.integer  "seconds_passed"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

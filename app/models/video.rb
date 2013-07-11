@@ -13,7 +13,7 @@ class Video < ActiveRecord::Base
 
   # find by internal id or youtube token
   def self.find(id)
-    if !id || id.numeric?
+    if !id || "#{id}".numeric?
       return super id
     else
       return find_by_token id
@@ -23,6 +23,25 @@ class Video < ActiveRecord::Base
   def networks
     super.group('networks.id').all
   end
+
+  def impressions network=nil, o={}
+    i = super()
+    i = i.where(network_id: network.id) if network
+    i = i.select('DISTINCT network_id, ip_address') unless o[:all]
+    i
+  end
+  
+  def count_impressions network=nil, o={}
+    i = self.impressions network, o
+    i.all.count
+  end
+
+  def count_plays network=nil, o={}
+    i = self.impressions network, o
+    i.joins(:play).all.count
+  end
+
+
 
   def swf_link
     link_from_token self.token, :swf

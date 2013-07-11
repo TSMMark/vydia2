@@ -3,8 +3,10 @@
   <table class="table">
     <tr>
       <th>Video</th>
+      <th>Unique Impressions</th>
       <th>Impressions</th>
-      <th>Views</th>
+      <th>Unique Plays</th>
+      <th>Plays</th>
       <th>Royalties</th>
     </tr>
 
@@ -12,7 +14,9 @@
       <tr>
         <td><%= link_to_video v %></td>
         <td><%= @network.count_impressions(v) %></td>
-        <td></td>
+        <td><%= @network.count_impressions(v, all: true) %></td>
+        <td><%= @network.count_plays(v) %></td>
+        <td><%= @network.count_plays(v, all: true) %></td>
         <td></td>
       </tr>
     <% end %>
