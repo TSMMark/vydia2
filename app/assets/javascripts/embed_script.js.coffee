@@ -28,45 +28,34 @@ onPlayerReady = (playerId) ->
   window.player_is_ready = true
 
 onPlayerStateChange = (newState) ->
-  console.log newState
   switch newState.data
     when 1
-      Embed.play_begin()
+      Embed.on_begin()
     when 2
-      Embed.play_pause()
+      Embed.on_pause()
     when 0
-      Embed.play_complete()
+      Embed.on_complete()
 
-Embed.play_begin  = ->
+Embed.on_begin  = ->
   Embed.duration  = Embed.player.getDuration()
   Embed.timer     = setInterval Embed.interval, 1000
-  console.log "Video Duration", Embed.duration
   Embed.interval()
 
-Embed.play_pause  = ->
+Embed.on_pause  = ->
   Embed.stop_timer()
+
+Embed.on_complete = ->
+  Embed.stop_timer()
+  Embed.state_complete(4)
 
 Embed.stop_timer  = ->
   clearInterval Embed.timer  
-
-Embed.play_complete = ->
-  Embed.stop_timer()
-
-  Embed.state_complete(4)
-
-  # src = Embed.tracking_url
-  # f = document.getElementsByTagName("img")[0]
-  
-  # # don't add if already there
-  # return false  if f.src.indexOf(src) isnt -1
-  # i = document.createElement("img")
-  # i.src = src
-  # f.parentNode.insertBefore i, f
 
 Embed.get_state_url = ->
   return Embed.tracking_url + "?state=#{Embed.current_state}"
 
 Embed.state_complete = (state)->
+  Embed.stop_timer() if state is 4
   return false if state is Embed.current_state
   Embed.current_state = state
   Embed.send_state()
@@ -78,7 +67,7 @@ Embed.send_state = ->
   # don't add if already there
   return false unless f.src.indexOf(src) is -1
 
-  console.log "SENDING STATE: (#{Embed.current_state})"
+  # console.log "SENDING STATE: (#{Embed.current_state})"
 
   i = document.createElement("img")
   i.src = src
@@ -94,7 +83,7 @@ Embed.interval = ->
   # 0-4 for 0%-100%
   state = Math.min(Math.max(Math.floor(percentage / cutoff),0),4)
 
-  console.log "#{current_time} / #{duration} = #{percentage} (#{state})"
+  # console.log "#{current_time} / #{duration} = #{percentage} (#{state})"
 
   Embed.state_complete state
 
