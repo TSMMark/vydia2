@@ -5,18 +5,25 @@
       <th>Video</th>
       <th>Unique Impressions</th>
       <th>Impressions</th>
-      <th>Unique Plays</th>
-      <th>Plays</th>
+      <th>Unique Views</th>
+      <th>Views</th>
+      <th>Full Plays</th>
+      <th>Bounces</th>
       <th>Royalties</th>
     </tr>
 
     <% @videos.each do |v| %>
       <tr>
         <td><%= link_to_video v %></td>
-        <td><%= @network.count_impressions(v) %></td>
-        <td><%= @network.count_impressions(v, all: true) %></td>
-        <td><%= @network.count_plays(v) %></td>
-        <td><%= @network.count_plays(v, all: true) %></td>
+        <td><%= @network.count_impressions(v, unique: true) %></td>
+        <td><%= @network.count_impressions(v, unique: false) %></td>
+        <td><%= @network.count_plays(v, unique: true) %></td>
+        <td><%= @network.count_plays(v, unique: false) %></td>
+
+        <td><%= @network.count_plays(v, unique: false, min_state: 4) %></td>
+
+        <td><%= @network.count_plays(v, unique: false, max_state: 0) %></td>
+
         <td></td>
       </tr>
     <% end %>

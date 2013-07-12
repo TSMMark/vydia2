@@ -24,10 +24,12 @@ class TrackerController < ApplicationController
   end
 
   def view
+    # state is 0-4  (0-100%)
     state = params[:state].to_i
     state = [state, 0].max
     state = [state, 4].min
 
+    # if there's no impression for this IP / video
     unless @impression.blank?
       play = @impression.play || Play.generate(@impression)
       play.state = state if (!play.state || state >= play.state)

@@ -1,26 +1,40 @@
 <h4>Featured on:</h4>
+
 <% unless @networks.blank? %>
+
+
   <table class="table">
     <tr>
       <th>Network</th>
       <th>Unique Impressions</th>
       <th>Impressions</th>
-      <th>Unique Plays</th>
-      <th>Plays</th>
+      <th>Unique Views</th>
+      <th>Views</th>
+      <th>Full Plays</th>
+      <th>Bounces</th>
       <th>Royalties</th>
     </tr>
 
     <% @networks.each do |n| %>
       <tr>
         <td><%= link_to_network n %></td>
-        <td><%= n.count_impressions(@video) %></td>
-        <td><%= n.count_impressions(@video, all: true) %></td>
-        <td><%= n.count_plays(@video) %></td>
-        <td><%= n.count_plays(@video, all: true) %></td>
+        <td><%= n.count_impressions(@video, unique: true) %></td>
+        <td><%= n.count_impressions(@video, unique: false) %></td>
+        <td><%= n.count_plays(@video, unique: true) %></td>
+        <td><%= n.count_plays(@video, unique: false) %></td>
+
+        <td><%= n.count_plays(@video, unique: false, min_state: 4) %></td>
+
+        <td><%= n.count_plays(@video, unique: false, max_state: 0) %></td>
+
         <td></td>
       </tr>
     <% end %>
+
   </table>
+
+
+
 <% else %>
   <p>This video has no network impressions</p>
 <% end %>
