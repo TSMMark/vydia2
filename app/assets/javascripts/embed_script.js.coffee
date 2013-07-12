@@ -5,7 +5,7 @@ window.Embed ||=
   "player_id"     : null
   "player"        : null
   "duration"      : null
-
+  "current_state" : null
 
 # when iframe_api is loaded and ready to be used
 #   basically an initializer
@@ -44,39 +44,59 @@ Embed.play_begin  = ->
   Embed.interval()
 
 Embed.play_pause  = ->
-  clearInterval Embed.timer
+  Embed.stop_timer()
+
+Embed.stop_timer  = ->
+  clearInterval Embed.timer  
 
 Embed.play_complete = ->
-  Embed.play_pause()
+  Embed.stop_timer()
 
-  src = Embed.tracking_url
-  f = document.getElementsByTagName("img")[0]
+  Embed.state_complete(4)
+
+  # src = Embed.tracking_url
+  # f = document.getElementsByTagName("img")[0]
   
-  # don't add if already there
-  return false  if f.src.indexOf(src) isnt -1
-  i = document.createElement("img")
-  i.src = src
-  f.parentNode.insertBefore i, f
+  # # don't add if already there
+  # return false  if f.src.indexOf(src) isnt -1
+  # i = document.createElement("img")
+  # i.src = src
+  # f.parentNode.insertBefore i, f
+
+Embed.get_state_url = ->
+  return Embed.tracking_url + "?state=#{Embed.current_state}"
 
 Embed.state_complete = (state)->
-  return false if state == Embed.last_state
-  Embed.last_state = state
-  console.log "state", state
+  return false if state is Embed.current_state
+  Embed.current_state = state
+  Embed.send_state()
+
+Embed.send_state = ->
+  src = Embed.get_state_url()
+  f   = document.getElementsByTagName("img")[0]
+
+  # don't add if already there
+  return false unless f.src.indexOf(src) is -1
+
+  console.log "SENDING STATE: (#{Embed.current_state})"
+
+  i = document.createElement("img")
+  i.src = src
+  f.parentNode.insertBefore(i, f)
 
 Embed.interval = ->
   duration      = Embed.duration
   current_time  = Embed.player.getCurrentTime()
+  
   percentage    = current_time / duration
-  console.log "#{current_time} / #{duration} = #{percentage}"
-  state = switch
-    when percentage > .99 then 4
-    when percentage > .74 then 3
-    when percentage > .49 then 2
-    when percentage > .24 then 1
-    else 0
+  cutoff        = 0.24
+
+  # 0-4 for 0%-100%
+  state = Math.min(Math.max(Math.floor(percentage / cutoff),0),4)
+
+  console.log "#{current_time} / #{duration} = #{percentage} (#{state})"
 
   Embed.state_complete state
-
 
 
 
