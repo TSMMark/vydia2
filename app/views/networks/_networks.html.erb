@@ -1,3 +1,4 @@
+<% unless @networks.blank? %>
 <table>
   <tr>
     <th>Name</th>
@@ -17,3 +18,6 @@
   </tr>
 <% end %>
 </table>
+<% else %>
+  <h5>no networks</h5>
+<% end %>
