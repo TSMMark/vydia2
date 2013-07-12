@@ -15,4 +15,18 @@ class Play < ActiveRecord::Base
     p
   end
 
+  def state
+    super
+  end
+
+  # 0-5 : 0%-100%
+  def self.default_min_state
+    # a video needs to be played 25% to count as a play
+    1
+  end
+
+  def self.default_max_state
+    4
+  end
+
 end

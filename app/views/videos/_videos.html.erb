@@ -1,21 +1,25 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th># Networks</th>
-    <th>YouTube Token</th>
-    <th>View</th>
-    <th></th>
-    <th></th>
-  </tr>
+<% unless @videos.blank? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th># Networks</th>
+      <th>YouTube Token</th>
+      <th>View</th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @videos.each do |video| %>
-  <tr>
-    <td><%= link_to_video video %></td>
-    <td><%= video.networks.count %></td>
-    <td><%= video.token%></td>
-    <td><%= link_to icon_youtube, video.link, target: :_blank %></td>
-    <td><%= link_to icon_update, edit_video_path(video) %></td>
-    <td><%= link_to icon_destroy, video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <% @videos.each do |video| %>
+    <tr>
+      <td><%= link_to_video video %></td>
+      <td><%= video.networks.count %></td>
+      <td><%= video.token%></td>
+      <td><%= link_to icon_youtube, video.link, target: :_blank %></td>
+      <td><%= link_to icon_update, edit_video_path(video) %></td>
+      <td><%= link_to icon_destroy, video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <h5>no videos</h5>
 <% end %>
-</table>

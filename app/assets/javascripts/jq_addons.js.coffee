@@ -21,3 +21,8 @@ $.fn.selectOnFocus = ->
         false
 
       $$.mouseup mouseUpHandler
+
+# $.data.every = []
+# $.fn.every = ->
+#   return false if typeof @ == "function"
+  

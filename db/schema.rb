@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711192340) do
+ActiveRecord::Schema.define(:version => 20130712192104) do
 
   create_table "impressions", :force => true do |t|
     t.integer  "video_id"
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(:version => 20130711192340) do
     t.datetime "updated_at",     :null => false
     t.integer  "state"
   end
+
+  add_index "plays", ["impression_id"], :name => "index_plays_on_impression_id", :unique => true
+  add_index "plays", ["state"], :name => "index_plays_on_state"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

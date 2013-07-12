@@ -25,20 +25,28 @@ class Video < ActiveRecord::Base
   end
 
   def impressions network=nil, o={}
+    o[:unique] = true if o[:unique].nil?
     i = super()
     i = i.where(network_id: network.id) if network
-    i = i.select('DISTINCT network_id, ip_address') unless o[:all]
+    i = i.select('DISTINCT network_id, ip_address') if o[:unique]
     i
   end
   
+  def plays network=nil, o={}
+    o[:min_state] = Play.default_min_state if o[:min_state].nil?
+    o[:max_state] = Play.default_max_state if o[:max_state].nil?
+    o[:min_state] = [o[:max_state], o[:min_state]].min
+    i = self.impressions(network, o).joins(:play)
+    i.where("state >= ? AND state <= ?", o[:min_state], o[:max_state])
+  end
+
   def count_impressions network=nil, o={}
-    i = self.impressions network, o
+    i = self.impressions(network, o)
     i.all.count
   end
 
   def count_plays network=nil, o={}
-    i = self.impressions network, o
-    i.joins(:play).all.count
+    i = plays(network, o).all.count
   end
 
 

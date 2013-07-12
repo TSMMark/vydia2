@@ -7,11 +7,6 @@ class TrackerController < ApplicationController
   before_filter :existing_impression
 
   def impression
-    # if @impression.blank?
-    # end
-    @video      = Video.find_by_token params[:id]
-    @network    = Network.find_by_token params[:network_id]
-
     if @video && @network then
       @impression = Impression.new do |imp|
         imp.video_id    = @video.id
@@ -29,8 +24,17 @@ class TrackerController < ApplicationController
   end
 
   def view
+    # state is 0-4  (0-100%)
+    state = params[:state].to_i
+    state = [state, 0].max
+    state = [state, 4].min
+
+    # if there's no impression for this IP / video
     unless @impression.blank?
-      @impression.play = Play.generate @impression
+      play = @impression.play || Play.generate(@impression)
+      play.state = state if (!play.state || state >= play.state)
+      @impression.play = play
+      play.save
       @impression.save
     end
 
