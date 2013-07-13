@@ -4,6 +4,9 @@ module RailsExtensions
     def with_symbol
       "#{self.currency.symbol}#{self.to_s}"
     end
+    def self.one_thousand
+      10
+    end
   end
 
   class ::String

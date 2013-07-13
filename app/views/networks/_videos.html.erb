@@ -3,29 +3,45 @@
   <table class="table">
     <tr>
       <th>Video</th>
+      <th>Offered CPM</th>
       <th>Unique Impressions</th>
       <th>Impressions</th>
       <th>Unique Views</th>
       <th>Views</th>
       <th>Full Plays</th>
       <th>Bounces</th>
-      <th>Royalties</th>
+      <th>Revenue</th>
     </tr>
 
     <% @videos.each do |v| %>
-    <% plays = @network.count_plays(v, unique: false) %>
+    <% views = @network.count_plays(v, unique: false) %>
       <tr>
+        <!-- Video Name -->
         <td><%= link_to_video v %></td>
-        <td><%= @network.count_impressions(v, unique: true) %></td>
-        <td><%= @network.count_impressions(v, unique: false) %></td>
-        <td><%= @network.count_plays(v, unique: true) %></td>
-        <td><%= plays %></td>
 
+        <!-- Video Name -->
+        <td><%= @network.parse_bid_cpm(v.parse_bid_cpm) %></td>
+
+        <!-- Unique Impressions -->
+        <td><%= @network.count_impressions(v, unique: true) %></td>
+
+        <!-- Impressions -->
+        <td><%= @network.count_impressions(v, unique: false) %></td>
+
+        <!-- Unique Views -->
+        <td><%= @network.count_plays(v, unique: true) %></td>
+
+        <!-- Views -->
+        <td><%= views %></td>
+
+        <!-- Full Plays -->
         <td><%= @network.count_plays(v, unique: false, min_state: 4) %></td>
 
+        <!-- Bounces -->
         <td><%= @network.count_plays(v, unique: false, max_state: 0) %></td>
 
-        <td><%= @network.video_revenue(v, plays).with_symbol %></td>
+        <!-- Royalties Collected from Video -->
+        <td><%= @network.video_revenue(v, views).with_symbol %></td>
       </tr>
     <% end %>
   </table>

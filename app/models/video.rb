@@ -54,6 +54,26 @@ class Video < ActiveRecord::Base
   end
 
 
+  def network_spending network, views = nil
+    views ||= count_views(network)
+    calculate_spending views, self.cpm
+  end
+
+  def calculate_spending views, bid_cpm
+    r = parse_bid_cpm * views.to_f / Money.one_thousand
+
+    # multiply by 100 for Money
+    Money.new(r * 100)
+  end
+
+  # prepare bid_cpm to be multiplied a view count
+  def parse_bid_cpm
+    cpm
+  end
+
+
+
+
   def swf_link
     link_from_token self.token, :swf
   end

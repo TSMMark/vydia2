@@ -12,22 +12,36 @@
       <th>Views</th>
       <th>Full Plays</th>
       <th>Bounces</th>
-      <th>Royalties</th>
+      <th>Spent</th>
     </tr>
 
     <% @networks.each do |n| %>
+    <% views = n.count_plays(@video, unique: false) %>
       <tr>
+        <!-- Network Name -->
         <td><%= link_to_network n %></td>
-        <td><%= n.count_impressions(@video, unique: true) %></td>
-        <td><%= n.count_impressions(@video, unique: false) %></td>
-        <td><%= n.count_plays(@video, unique: true) %></td>
-        <td><%= n.count_plays(@video, unique: false) %></td>
 
+        <!-- Unique Impressions -->
+        <td><%= n.count_impressions(@video, unique: true) %></td>
+
+        <!-- Impressions -->
+        <td><%= n.count_impressions(@video, unique: false) %></td>
+
+        <!-- Unique Views -->
+        <td><%= n.count_plays(@video, unique: true) %></td>
+
+        <!-- Views -->
+        <td><%= views %></td>
+
+        <!-- Full Plays -->
         <td><%= n.count_plays(@video, unique: false, min_state: 4) %></td>
 
+        <!-- Bounces -->
         <td><%= n.count_plays(@video, unique: false, max_state: 0) %></td>
 
-        <td></td>
+        <!-- Amount spend on this network -->
+        <td><%= @video.network_spending(n, views).with_symbol %></td>
+        
       </tr>
     <% end %>
 
