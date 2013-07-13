@@ -43,6 +43,9 @@ gem 'uniquify-uuid'
 # gem 'zepto-rails', :github => 'frontfoot/zepto-rails'
 
 gem 'simple_form'
+
+gem 'money-rails'
+
 # gem 'paperclip', "~> 3.0"
 # gem 'aws-sdk'
 # gem 'faker'

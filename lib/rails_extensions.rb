@@ -1,4 +1,10 @@
 module RailsExtensions
+  
+  class ::Money
+    def with_symbol
+      "#{self.currency.symbol}#{self.to_s}"
+    end
+  end
 
   class ::String
     def numeric?

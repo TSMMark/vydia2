@@ -25,7 +25,7 @@
 
         <td><%= @network.count_plays(v, unique: false, max_state: 0) %></td>
 
-        <td><%= @network.video_revenue(v, plays) %></td>
+        <td><%= @network.video_revenue(v, plays).with_symbol %></td>
       </tr>
     <% end %>
   </table>

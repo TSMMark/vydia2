@@ -83,6 +83,7 @@ class VideosController < BaseAuthController
   # PUT /videos/1.json
   def update
     @video = Video.find(params[:id])
+    params[:video][:token]  = token_from_link params[:video][:token]
 
     respond_to do |format|
       if @video.update_attributes(params[:video])
