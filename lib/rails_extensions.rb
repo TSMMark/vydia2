@@ -5,7 +5,7 @@ module RailsExtensions
       "#{self.currency.symbol}#{self.to_s}"
     end
     def self.one_thousand
-      10
+      Rails.env.production? 1000 : 10
     end
   end
 
