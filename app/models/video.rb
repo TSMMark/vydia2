@@ -1,7 +1,7 @@
 class Video < ActiveRecord::Base
   include VideosHelper
 
-  attr_accessible :token, :name
+  attr_accessible :token, :name, :cpm
 
   belongs_to :user, inverse_of: :videos
 
@@ -49,6 +49,9 @@ class Video < ActiveRecord::Base
     i = plays(network, o).all.count
   end
 
+  def count_views network=nil
+    count_plays network
+  end
 
 
   def swf_link

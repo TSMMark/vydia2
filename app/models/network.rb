@@ -53,5 +53,26 @@ class Network < ActiveRecord::Base
   def count_plays video=nil, o={}
     plays(video, o).all.count
   end
+  def count_views video=nil
+    count_plays video
+  end
+
+
+  def video_revenue video, views = nil
+    views ||= count_views(video)
+    calculate_revenue views, video.cpm
+  end
+
+  def calculate_revenue views, bid_cpm
+    r = bid_cpm * (views.to_f / one_thousand) * split_keep
+    r.round(2)
+  end
+
+  def one_thousand
+    1000
+  end
+  def split_keep
+    0.75
+  end
 
 end

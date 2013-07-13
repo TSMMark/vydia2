@@ -13,18 +13,19 @@
     </tr>
 
     <% @videos.each do |v| %>
+    <% plays = @network.count_plays(v, unique: false) %>
       <tr>
         <td><%= link_to_video v %></td>
         <td><%= @network.count_impressions(v, unique: true) %></td>
         <td><%= @network.count_impressions(v, unique: false) %></td>
         <td><%= @network.count_plays(v, unique: true) %></td>
-        <td><%= @network.count_plays(v, unique: false) %></td>
+        <td><%= plays %></td>
 
         <td><%= @network.count_plays(v, unique: false, min_state: 4) %></td>
 
         <td><%= @network.count_plays(v, unique: false, max_state: 0) %></td>
 
-        <td></td>
+        <td><%= @network.video_revenue(v, plays) %></td>
       </tr>
     <% end %>
   </table>

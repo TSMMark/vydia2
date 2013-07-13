@@ -28,6 +28,12 @@ module RailsExtensions
 
   end
 
+  class ::Float
+    def round(n=0)
+        (self * (10.0 ** n)).round_orig * (10.0 ** (-n))
+    end
+  end
+
   class ::Symbol
     def constantize camel=true
       s = self.to_s
