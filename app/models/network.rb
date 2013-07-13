@@ -66,16 +66,17 @@ class Network < ActiveRecord::Base
   def calculate_revenue views, bid_cpm
     r = parse_bid_cpm(bid_cpm) * views.to_f / Money.one_thousand
 
-    # multiply by 100 for Money
-    Money.new(r * 100)
+    Money.new(r)
   end
 
   # prepare bid_cpm
   def parse_bid_cpm bid_cpm
+    Network.parse_bid_cpm(bid_cpm)
+  end
+  def self.parse_bid_cpm bid_cpm
     (bid_cpm * split_keep)
   end
-
-  def split_keep
+  def self.split_keep
     0.50
   end
 

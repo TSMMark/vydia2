@@ -2,6 +2,7 @@
   <table>
     <tr>
       <th>Name</th>
+      <th>Offered CPM</th>
       <th># Networks</th>
       <th>YouTube Token</th>
       <th>View</th>
@@ -12,6 +13,7 @@
   <% @videos.each do |video| %>
     <tr>
       <td><%= link_to_video video %></td>
+      <td><%= Money.new(Network.parse_bid_cpm(video.parse_bid_cpm)).with_symbol %></td>
       <td><%= video.networks.count %></td>
       <td><%= video.token%></td>
       <td><%= link_to icon_youtube, video.link, target: :_blank %></td>

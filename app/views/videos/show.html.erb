@@ -3,7 +3,7 @@
   <b>Token:</b> <%= @video.token %>
 </p>
 <p>
-  <b>Bid CPM:</b> <%= @video.cpm %>
+  <b>Bid CPM:</b> <%= Money.new(@video.cpm).with_symbol %>
 </p>
 
 
