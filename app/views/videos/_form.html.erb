@@ -4,7 +4,20 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :token, label: 'YouTube Link' %>
+  </div>
+  
+  <div class="form-inputs">
     <%= f.input :cpm, label: 'Bid CPM' %>
+  </div>
+
+  <h3>Ad Placement (html)</h3>
+  <div class="form-inputs">
+    <%= f.input :ad_after, as: :text,
+        label: 'After Video', input_html:
+          {rows: 5} %>
+    <%= f.input :ad_bottom, as: :text,
+        label: 'During Video (bottom)', input_html:
+          {rows: 5} %>
   </div>
 
   <div class="form-actions">

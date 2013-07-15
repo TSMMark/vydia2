@@ -1,4 +1,10 @@
+<div class="iframe-container <%= @video.ad_bottom.blank? ? "" : "with-ad" %>">
 <div id="player"></div>
+</div>
+
+<% unless @video.ad_bottom.blank? %>
+<div id="footer-bottom"><%= @video.ad_bottom.html_safe %></div>
+<% end %>
 
 <script type="text/javascript">
   window.Embed = window.Embed || {};
@@ -8,5 +14,4 @@
   window.Embed["player_id"]     = "player";
   window.Embed["player"]        = null;
 </script>
-
 

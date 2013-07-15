@@ -1,11 +1,16 @@
 
 
 window.Helper =
-  embed_code: (video, network)->
+  embed_code: (video, network, ad_bottom='')->
+    extra_height  = !!ad_bottom
+    height        = Var.iframe.default_height
+    height       += Var.iframe.ad_bottom_height if extra_height
+    width         = Var.iframe.default_width
+
     src = "//#{Var.domain}/videos/#{video}/embed/#{network}"
     iframe_inner  = "" # "Your browser is extremely old. <a href='//google.com/chrome'>Upgrade it</a>."
 
-    "<iframe width=\"560\" height=\"315\" src=\"#{src}\" frameborder=\"0\" allowfullscreen>#{iframe_inner}</iframe>"
+    "<iframe width=\"#{width}\" height=\"#{height}\" src=\"#{src}\" frameborder=\"0\" allowfullscreen>#{iframe_inner}</iframe>"
 
   load_js: (url)->
     (((d,e,l)->
@@ -17,9 +22,3 @@ window.Helper =
     )(window.document, 'script', url))
 
 
-
-
-$ ->
-  $('.datatable').dataTable 
-    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
-    "sPaginationType": "bootstrap"
