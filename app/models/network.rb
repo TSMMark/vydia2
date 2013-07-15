@@ -54,7 +54,7 @@ class Network < ActiveRecord::Base
     plays(video, o).all.count
   end
   def count_views video=nil
-    count_plays video
+    count_plays video, unique: false
   end
 
 
@@ -62,20 +62,60 @@ class Network < ActiveRecord::Base
     views ||= count_views(video)
     calculate_revenue views, video.cpm
   end
+  def vydia_revenue
+    sum = 0
+    videos.each do |v|
+      sum += (video_revenue(v) / split_keep * vydia_keep)
+    end
+    sum
+  end
 
   def calculate_revenue views, bid_cpm
-    r = parse_bid_cpm(bid_cpm) * views.to_f / Money.one_thousand
+    r = Network.cpm_formula(offered_cpm(bid_cpm), views)
   end
 
-  # prepare bid_cpm
-  def parse_bid_cpm bid_cpm
-    Network.parse_bid_cpm(bid_cpm)
+  # CPM the network keeps
+  def offered_cpm bid_cpm
+    bid_cpm * split_keep
   end
-  def self.parse_bid_cpm bid_cpm
-    (bid_cpm * split_keep)
+  
+  # CPM Vydia keeps
+  def vydia_cpm bid_cpm
+    bid_cpm * (1 - split_keep)
   end
-  def self.split_keep
+
+  # define ratio ( 1 == network keeps 100% and Vydia keeps 0% )
+  def split_keep
+    Network.default_split
+  end
+  def vydia_keep
+    (1 - split_keep)
+  end
+
+  # Class Methods
+  def self.cpm_formula cpm, views
+    views.to_f / Money.one_thousand * cpm
+  end
+
+  # calculate total Vydia revenue
+  def self.vydia_revenue
+    sum = 0
+    Network.all.each do |n|
+      r = n.vydia_revenue
+      sum += r
+      puts r
+    end
+    sum
+  end
+  
+  # CPM the network keeps
+  def self.offered_cpm bid_cpm
+    bid_cpm * default_split
+  end
+  def self.default_split
     0.50
   end
+
+
 
 end

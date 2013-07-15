@@ -16,7 +16,7 @@
       <td><%= link_to_video video %></td>
 
       <!-- Offered CPM (accounting for vydia's percentage) -->
-      <td><%= Money.new(Network.parse_bid_cpm(video.parse_bid_cpm)).with_symbol %></td>
+      <td><%= Money.new(Network.offered_cpm(video.cpm)).with_symbol %></td>
 
       <!-- Number of Networks the video is featured on -->
       <td><%= video.networks.count %></td>
