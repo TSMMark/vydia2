@@ -12,3 +12,5 @@
 # ... require any other custom modules your application uses
 
 require 'rails_extensions'
+
+require 'money_extensions'

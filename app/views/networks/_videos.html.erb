@@ -20,7 +20,7 @@
         <td><%= link_to_video v %></td>
 
         <!-- Video Name -->
-        <td><%= Money.new(@network.parse_bid_cpm(v.parse_bid_cpm)).with_symbol %></td>
+        <td><%= Money.new(@network.parse_bid_cpm(v.parse_bid_cpm)).with_symbol%></td>
 
         <!-- Unique Impressions -->
         <td><%= @network.count_impressions(v, unique: true) %></td>
