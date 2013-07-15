@@ -7,7 +7,6 @@
 </select>
 
 <div class="generated-code-container">
-  <textarea style="display:none;"></textarea>
 </div>
 
 
@@ -16,22 +15,23 @@
     var generator, code_container;
 
     generator       = $(".embed-code-generator");
-    code_container  = $(".generated-code-container textarea");
+    code_container  = $(".generated-code-container");
 
     generator.on('change', function() {
       var network_token = generator.val();
-      var embed_code    = '';
-      if(network_token != 0){
-        code_container.show();
-        embed_code = Helper.embed_code("<%= @video.token %>", network_token);
-      }else{
-        code_container.hide();
+      var network_name  = generator.find("option:selected").text();
+      if(network_token == 0){
+        return;
       }
-      return code_container.val(
-        embed_code
-      );
+      var new_textarea  = $("<textarea/>");
+      var embed_code    = '';
+      embed_code = Helper.embed_code("<%= @video.token %>", network_token);
+      new_textarea.val(embed_code);
+      code_container
+        .prepend(new_textarea)
+        .prepend("<h6>"+network_name+"</h6>");
+      new_textarea.selectOnFocus();
     });
 
-    code_container.selectOnFocus();
   });
 </script>
