@@ -86,12 +86,11 @@ class Network < ActiveRecord::Base
 
   # define ratio ( 1 == network keeps 100% and Vydia keeps 0% )
   def split_keep
-    0.50
+    default_split
   end
   def vydia_keep
     (1 - split_keep)
   end
-
 
   # Class Methods
   def self.cpm_formula cpm, views
@@ -107,6 +106,14 @@ class Network < ActiveRecord::Base
       puts r
     end
     sum
+  end
+  
+  # CPM the network keeps
+  def self.offered_cpm bid_cpm
+    bid_cpm * default_split
+  end
+  def self.default_split
+    0.50
   end
 
 
