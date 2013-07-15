@@ -12,10 +12,19 @@
 
   <% @videos.each do |video| %>
     <tr>
+      <!-- Video Name -->
       <td><%= link_to_video video %></td>
+
+      <!-- Offered CPM (accounting for vydia's percentage) -->
       <td><%= Money.new(Network.parse_bid_cpm(video.parse_bid_cpm)).with_symbol %></td>
+
+      <!-- Number of Networks the video is featured on -->
       <td><%= video.networks.count %></td>
+
+      <!-- YouTube String ID -->
       <td><%= video.token%></td>
+
+      <!-- YouTube Link -->
       <td><%= link_to icon_youtube, video.link, target: :_blank %></td>
       <td><%= link_to icon_update, edit_video_path(video) %></td>
       <td><%= link_to icon_destroy, video, method: :delete, data: { confirm: 'Are you sure?' } %></td>

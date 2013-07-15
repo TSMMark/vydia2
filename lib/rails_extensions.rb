@@ -29,8 +29,8 @@ module RailsExtensions
   end
 
   class ::Float
-    def round(n=0)
-        (self * (10.0 ** n)).round_orig * (10.0 ** (-n))
+    def rount_to n=0
+      (self * (10.0 ** n)).round * (10.0 ** (-n))
     end
   end
 

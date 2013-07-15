@@ -1,6 +1,6 @@
 <% @networks = Network.all %>
 <select class="embed-code-generator">
-  <option value="0">--Select a Network--</option>
+  <option value="0">-- Select a Network --</option>
   <% @networks.each do |n| %>
     <option value="<%= n.token %>"><%= n.name %></option>
   <% end %>

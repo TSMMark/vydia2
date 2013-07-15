@@ -1,50 +1,167 @@
 <h4>Features:</h4>
 <% unless @videos.blank? %>
-  <table class="table">
-    <tr>
-      <th>Video</th>
-      <th>Offered CPM</th>
-      <th>Unique Impressions</th>
-      <th>Impressions</th>
-      <th>Unique Views</th>
-      <th>Views</th>
-      <th>Full Plays</th>
-      <th>Bounces</th>
-      <th>Revenue</th>
-    </tr>
-
-    <% @videos.each do |v| %>
-    <% views = @network.count_plays(v, unique: false) %>
+  <table class="table datatable">
+    <thead>
       <tr>
-        <!-- Video Name -->
-        <td><%= link_to_video v %></td>
+        <th>Video</th>
+        <th>Offered CPM</th>
+        <th>Unique Impressions</th>
+        <th>Impressions</th>
+        <th>Unique Views</th>
+        <th>Views</th>
+        <th>Full Plays</th>
+        <th>Bounces</th>
+        <th>Revenue</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <%  totals = {
+            offered_cpm: 0,
+            unique_impressions: 0,
+            impressions: 0,
+            unique_views: 0,
+            views: 0,
+            full_plays: 0,
+            bounces: 0,
+            royalties: 0
+          }
+      %>
+      <% @videos.each do |v| %>
+
+        <% offered_cpm = @network.parse_bid_cpm(v.parse_bid_cpm) %>
+        <% totals[:offered_cpm] += offered_cpm %>
+
+        <% unique_impressions = @network.count_impressions(v, unique: true) %>
+        <% totals[:unique_impressions]  += unique_impressions %>
+
+        <% impressions = @network.count_impressions(v, unique: false) %>
+        <% totals[:impressions] += impressions %>
+
+        <% unique_views = @network.count_plays(v, unique: true) %>
+        <% totals[:unique_views]  += unique_views %>
+
+        <% views = @network.count_plays(v, unique: false) %>
+        <% totals[:views] += views %>
+
+        <% full_plays = @network.count_plays(v, unique: false, min_state: 4) %>
+        <% totals[:full_plays]  += full_plays %>
+        
+        <% bounces = @network.count_plays(v, unique: false, max_state: 0) %>
+        <% totals[:bounces] += bounces %>
+        
+        <% royalties = @network.video_revenue(v, views) %>
+        <% totals[:royalties] += royalties %>
+
+
+        <tr>
+          <!-- Video Name -->
+          <td><%= link_to_video v %></td>
+
+          <!-- Video Offered CPM -->
+          <td><%= Money.new(offered_cpm).with_symbol %></td>
+
+          <!-- Unique Impressions -->
+          <td><%= unique_impressions %></td>
+
+          <!-- Impressions -->
+          <td><%= impressions %></td>
+
+          <!-- Unique Views -->
+          <td><%= unique_views %></td>
+
+          <!-- Views -->
+          <td><%= views %></td>
+
+          <!-- Full Plays -->
+          <td><%= full_plays %></td>
+
+          <!-- Bounces -->
+          <td><%= bounces %></td>
+
+          <!-- Royalties Collected from Video -->
+          <td><%= Money.new(royalties).with_symbol %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+
+    <tfoot>
+      <tr class="totals">
         <!-- Video Name -->
-        <td><%= Money.new(@network.parse_bid_cpm(v.parse_bid_cpm)).with_symbol%></td>
+        <th>Totals</th>
+
+        <!-- Video Offered CPM -->
+        <th><%= Money.new(totals[:offered_cpm]).with_symbol %></th>
 
         <!-- Unique Impressions -->
-        <td><%= @network.count_impressions(v, unique: true) %></td>
+        <th><%= totals[:unique_impressions] %></th>
 
         <!-- Impressions -->
-        <td><%= @network.count_impressions(v, unique: false) %></td>
+        <th><%= totals[:impressions] %></th>
 
         <!-- Unique Views -->
-        <td><%= @network.count_plays(v, unique: true) %></td>
+        <th><%= totals[:unique_views] %></th>
 
         <!-- Views -->
-        <td><%= views %></td>
+        <th><%= totals[:views] %></th>
 
         <!-- Full Plays -->
-        <td><%= @network.count_plays(v, unique: false, min_state: 4) %></td>
+        <th><%= totals[:full_plays] %></th>
 
         <!-- Bounces -->
-        <td><%= @network.count_plays(v, unique: false, max_state: 0) %></td>
+        <th><%= totals[:bounces] %></th>
 
         <!-- Royalties Collected from Video -->
-        <td><%= @network.video_revenue(v, views).with_symbol %></td>
+        <th><%= Money.new(totals[:royalties]).with_symbol %></th>
       </tr>
-    <% end %>
+
+
+    </tfoot>
+
+
   </table>
+
+<script type="text/javascript">
+  // $('.datatable').dataTable({
+  //   "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+  //   "sPaginationType": "bootstrap",
+
+  //   "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+      /*
+       * Calculate the total market share for all browsers in this table (ie inc. outside
+       * the pagination)
+       */
+      // var l = aaData.length;
+      // var full_totals = new Array(l).join('0').split('').map(parseFloat);
+
+      // console.log("aaData",aaData);
+
+      // for ( var i=0 ; i<l ; i++ ){
+
+      //   var row = aaData[i];
+      //   var ll  = row.length;
+      //   for( var ii=0 ; ii<ll ; ii++ ){
+      //     full_totals[ii] += row[ii];
+      //   }
+      // }
+      
+      // console.log("full_totals",full_totals);
+
+      /* Calculate the market share for browsers on this page */
+      // var page_totals = [];
+      // for ( var i=iStart ; i<iEnd ; i++ ){
+      //   iPageMarket += aaData[ aiDisplay[i] ][4]*1;
+      // }
+      
+      /* Modify the footer row to match what we want */
+      // var nCells = nRow.getElementsByTagName('th');
+      // nCells[1].innerHTML = parseInt(iPageMarket * 100)/100 +
+      //   '% ('+ parseInt(iTotalMarket * 100)/100 +'% total)';
+  //   }
+  // });
+</script>
+
 <% else %>
   <p>This network has no video features</p>
 <% end %>

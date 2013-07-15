@@ -61,8 +61,6 @@ class Video < ActiveRecord::Base
 
   def calculate_spending views, bid_cpm
     r = parse_bid_cpm * views.to_f / Money.one_thousand
-
-    Money.new(r)
   end
 
   # prepare bid_cpm to be multiplied a view count

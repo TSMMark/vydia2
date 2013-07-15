@@ -44,6 +44,8 @@ gem 'uniquify-uuid'
 
 gem 'simple_form'
 
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+
 gem 'money-rails'
 
 # gem 'paperclip', "~> 3.0"
