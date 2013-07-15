@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: 494f752b8eb8350f33841c822a67d014c869219f
+  specs:
+    jquery-datatables-rails (1.11.2)
+      jquery-rails
+
+GIT
   remote: git://github.com/thegillis/blank_pixel.git
   revision: e5330280aa4ab3ce28fde8878fbc1e2a24b6de59
   specs:
@@ -69,6 +76,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.22)
+    money (5.1.1)
+      i18n (~> 0.6.0)
+    money-rails (0.8.1)
+      activesupport (>= 3.0)
+      money (~> 5.1.0)
+      railties (>= 3.0)
     multi_json (1.7.2)
     orm_adapter (0.4.0)
     pg (0.15.1)
@@ -136,7 +149,9 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   font-awesome-rails
+  jquery-datatables-rails!
   jquery-rails
+  money-rails
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

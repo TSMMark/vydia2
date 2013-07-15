@@ -1,7 +1,7 @@
 class Video < ActiveRecord::Base
   include VideosHelper
 
-  attr_accessible :token, :name
+  attr_accessible :token, :name, :cpm
 
   belongs_to :user, inverse_of: :videos
 
@@ -48,6 +48,26 @@ class Video < ActiveRecord::Base
   def count_plays network=nil, o={}
     i = plays(network, o).all.count
   end
+
+  def count_views network=nil
+    count_plays network
+  end
+
+
+  def network_spending network, views = nil
+    views ||= count_views(network)
+    calculate_spending views, self.cpm
+  end
+
+  def calculate_spending views, bid_cpm
+    r = parse_bid_cpm * views.to_f / Money.one_thousand
+  end
+
+  # prepare bid_cpm to be multiplied a view count
+  def parse_bid_cpm
+    cpm
+  end
+
 
 
 

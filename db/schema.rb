@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712192104) do
+ActiveRecord::Schema.define(:version => 20130713001913) do
 
   create_table "impressions", :force => true do |t|
     t.integer  "video_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20130712192104) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+    t.float    "cpm"
   end
 
   add_index "videos", ["token"], :name => "index_videos_on_token", :unique => true

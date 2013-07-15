@@ -3,23 +3,28 @@
 
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th># Videos</th>
-    <th>Network Token</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @networks.each do |network| %>
+  <thead>
     <tr>
-      <td><%= link_to_network network %></td>
-      <td><%= network.videos.count %></td>
-      <td><%= network.token%></td>
-      <td><%= link_to icon_update, edit_network_path(network) %></td>
-      <td><%= link_to icon_destroy, network, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <th>Name</th>
+      <th># Videos</th>
+      <th>Network Token</th>
+      <th></th>
+      <th></th>
     </tr>
-  <% end %>
+  </thead>
+
+  <tbody>
+    <% @networks.each do |network| %>
+      <tr>
+        <td><%= link_to_network network %></td>
+        <td><%= network.videos.count %></td>
+        <td><%= network.token%></td>
+        <td><%= link_to icon_update, edit_network_path(network) %></td>
+        <td><%= link_to icon_destroy, network, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    
+  </tbody>
 
 </table>
 

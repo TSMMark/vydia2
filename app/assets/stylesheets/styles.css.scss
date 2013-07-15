@@ -3,18 +3,19 @@
 
 $myBreakSmall: 488px;
 
-@import 'bootstrap';
-
-body {
-	padding-top:60px;
-}
-
-@import 'bootstrap-responsive';
-
 table{
   @extend .table;
   @extend .table-bordered;
   @extend .table-striped;
+
+  tbody tr.info td, tbody tr.info th,
+  tfoot tr.info td, tfoot tr.info th {
+    background-color: light($green);
+    font-weight:bold;
+  }
+  .totals{
+    @extend .info
+  }
 }
 
 .hero-unit{

@@ -1,5 +1,5 @@
 module RailsExtensions
-
+  
   class ::String
     def numeric?
       !self.match(/[^0-9]/)
@@ -26,6 +26,12 @@ module RailsExtensions
       self
     end
 
+  end
+
+  class ::Float
+    def rount_to n=0
+      (self * (10.0 ** n)).round * (10.0 ** (-n))
+    end
   end
 
   class ::Symbol

@@ -1,35 +1,117 @@
-<h4>Featured on:</h4>
-
 <% unless @networks.blank? %>
 
 
-  <table class="table">
-    <tr>
-      <th>Network</th>
-      <th>Unique Impressions</th>
-      <th>Impressions</th>
-      <th>Unique Views</th>
-      <th>Views</th>
-      <th>Full Plays</th>
-      <th>Bounces</th>
-      <th>Royalties</th>
-    </tr>
+  <table class="table datatable">
 
-    <% @networks.each do |n| %>
+    <thead>
       <tr>
-        <td><%= link_to_network n %></td>
-        <td><%= n.count_impressions(@video, unique: true) %></td>
-        <td><%= n.count_impressions(@video, unique: false) %></td>
-        <td><%= n.count_plays(@video, unique: true) %></td>
-        <td><%= n.count_plays(@video, unique: false) %></td>
-
-        <td><%= n.count_plays(@video, unique: false, min_state: 4) %></td>
-
-        <td><%= n.count_plays(@video, unique: false, max_state: 0) %></td>
-
-        <td></td>
+        <th>Network</th>
+        <th>Unique Impressions</th>
+        <th>Impressions</th>
+        <th>Unique Views</th>
+        <th>Views</th>
+        <th>Full Plays</th>
+        <th>Bounces</th>
+        <th>Spent</th>
       </tr>
-    <% end %>
+    </thead>
+
+    <tbody>
+      <%
+        totals = {
+          unique_impressions: 0,
+          impressions: 0,
+          unique_views: 0,
+          views: 0,
+          full_plays: 0,
+          bounces: 0,
+          spent: 0
+        }
+      %>
+
+
+      <% @networks.each do |n| %>
+        <% 
+          unique_impressions = n.count_impressions(@video, unique: true)
+          totals[:unique_impressions] += unique_impressions
+
+          impressions = n.count_impressions(@video, unique: false)
+          totals[:impressions] += impressions
+
+          unique_views = n.count_plays(@video, unique: true)
+          totals[:unique_views] += unique_views
+
+          views = n.count_plays(@video, unique: false)
+          totals[:views] += views
+
+          full_plays = n.count_plays(@video, unique: false, min_state: 4)
+          totals[:full_plays] += full_plays
+
+          bounces = n.count_plays(@video, unique: false, max_state: 0)
+          totals[:bounces] += bounces
+
+          spent = @video.network_spending(n, views)
+          totals[:spent] += spent
+
+        %>
+        <tr>
+          <!-- Network Name -->
+          <td><%= link_to_network n %></td>
+
+          <!-- Unique Impressions -->
+          <td><%= unique_impressions %></td>
+
+          <!-- Impressions -->
+          <td><%= impressions %></td>
+
+          <!-- Unique Views -->
+          <td><%= unique_views %></td>
+
+          <!-- Views -->
+          <td><%= views %></td>
+
+          <!-- Full Plays -->
+          <td><%= full_plays %></td>
+
+          <!-- Bounces -->
+          <td><%= bounces %></td>
+
+          <!-- Amount spent on this network -->
+          <td><%= Money.new(spent).with_symbol %></td>
+          
+        </tr>
+      <% end %>
+    </tbody>
+
+
+    <tfoot>
+      <tr class="totals">
+        <!-- Video Name -->
+        <th>Totals</th>
+
+        <!-- Unique Impressions -->
+        <th><%= totals[:unique_impressions] %></th>
+
+        <!-- Impressions -->
+        <th><%= totals[:impressions] %></th>
+
+        <!-- Unique Views -->
+        <th><%= totals[:unique_views] %></th>
+
+        <!-- Views -->
+        <th><%= totals[:views] %></th>
+
+        <!-- Full Plays -->
+        <th><%= totals[:full_plays] %></th>
+
+        <!-- Bounces -->
+        <th><%= totals[:bounces] %></th>
+
+        <!-- Royalties Collected from Video -->
+        <th><%= Money.new(totals[:spent]).with_symbol %></th>
+      </tr>
+    </tfoot>
+
 
   </table>
 
