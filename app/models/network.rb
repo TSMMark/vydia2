@@ -86,7 +86,7 @@ class Network < ActiveRecord::Base
 
   # define ratio ( 1 == network keeps 100% and Vydia keeps 0% )
   def split_keep
-    default_split
+    Network.default_split
   end
   def vydia_keep
     (1 - split_keep)
