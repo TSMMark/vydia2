@@ -28,7 +28,7 @@
       %>
       <% @videos.each do |v| %>
 
-        <% offered_cpm = @network.parse_bid_cpm(v.parse_bid_cpm) %>
+        <% offered_cpm = @network.offered_cpm(v.cpm) %>
         <% totals[:offered_cpm] += offered_cpm %>
 
         <% unique_impressions = @network.count_impressions(v, unique: true) %>
@@ -40,7 +40,7 @@
         <% unique_views = @network.count_plays(v, unique: true) %>
         <% totals[:unique_views]  += unique_views %>
 
-        <% views = @network.count_plays(v, unique: false) %>
+        <% views = @network.count_views(v) %>
         <% totals[:views] += views %>
 
         <% full_plays = @network.count_plays(v, unique: false, min_state: 4) %>

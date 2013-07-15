@@ -19,6 +19,16 @@ class Play < ActiveRecord::Base
     super
   end
 
+  # play 100%
+  def self.full_plays
+    where("state >= ?", 4)
+  end
+
+  # play >= 25%
+  def self.views
+    where("state >= ? AND state <= ?", default_min_state, default_max_state)
+  end
+
   # 0-5 : 0%-100%
   def self.default_min_state
     # a video needs to be played 25% to count as a play

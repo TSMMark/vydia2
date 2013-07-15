@@ -50,7 +50,7 @@ class Video < ActiveRecord::Base
   end
 
   def count_views network=nil
-    count_plays network
+    count_plays network, unique: false
   end
 
 
@@ -60,15 +60,13 @@ class Video < ActiveRecord::Base
   end
 
   def calculate_spending views, bid_cpm
-    r = parse_bid_cpm * views.to_f / Money.one_thousand
+    r = cpm * views.to_f / Money.one_thousand
   end
 
   # prepare bid_cpm to be multiplied a view count
-  def parse_bid_cpm
-    cpm
+  def cpm
+    super
   end
-
-
 
 
   def swf_link
