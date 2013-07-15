@@ -25,7 +25,7 @@
       }
       var new_textarea  = $("<textarea/>");
       var embed_code    = '';
-      embed_code = Helper.embed_code("<%= @video.token %>", network_token, "<%= @video.ad_bottom %>");
+      embed_code = Helper.embed_code("<%= @video.token %>", network_token, <%= @video.ad_bottom.blank? ? false : true  %>);
       new_textarea.val(embed_code);
       code_container
         .prepend(new_textarea)
