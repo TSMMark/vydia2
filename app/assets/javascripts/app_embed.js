@@ -1,4 +1,4 @@
-//= require zepto/default
+//= require jquery
 //= require variables
 //= require helpers
 //  

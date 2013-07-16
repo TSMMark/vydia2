@@ -58,6 +58,16 @@ img{
   @include full-page;
   top       : auto;
   height    : $ad-bottom-height;
+  display   : table;
+  width     : 100%;
+  >div{
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    >div{
+    }
+  }
 }
 
 #after-video{

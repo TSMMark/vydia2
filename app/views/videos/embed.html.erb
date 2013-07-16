@@ -3,7 +3,11 @@
 </div>
 
 <% unless @video.ad_bottom.blank? %>
-<div id="footer-bottom"><%= @video.ad_bottom.html_safe %></div>
+<div id="footer-bottom">
+  <div><div>
+    <%= @video.ad_bottom.html_safe %>
+  </div></div>
+</div>
 <% end %>
 
 <% unless @video.ad_after.blank? %>
