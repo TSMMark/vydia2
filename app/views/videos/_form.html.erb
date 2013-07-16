@@ -2,8 +2,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.input :token, label: '<strong>Paste YouTube Link</strong>' %>
     <%= f.input :name %>
-    <%= f.input :token, label: 'YouTube Link' %>
   </div>
   
   <div class="form-inputs">
@@ -15,6 +15,9 @@
     <%= f.input :ad_after, as: :text,
         label: 'After Video', input_html:
           {rows: 5} %>
+  </div>
+  
+  <div class="form-inputs">
     <%= f.input :ad_bottom, as: :text,
         label: 'During Video (bottom)', input_html:
           {rows: 5} %>

@@ -61,8 +61,20 @@ a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
 // forms overrides
 .form-inputs{
   @extend .row-fluid;
-  .control-group, .form-actions {
+
+  .control-group, .form-actions{
     @extend [class*="span"];
-    @extend .span4;
+    &.string, &.float{
+      @extend .span6;
+    }
+    &.text, &.form-actions {
+      @extend .span12;
+    }
+    textarea{
+      width: 95%;
+    }
+    abbr[title=required]{
+      display: none;
+    }
   }
 }
