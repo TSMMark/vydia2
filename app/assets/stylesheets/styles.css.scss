@@ -53,3 +53,16 @@ a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
 .btn-networks{
   @extend .btn-green;
 }
+
+
+
+
+
+// forms overrides
+.form-inputs{
+  @extend .row-fluid;
+  .control-group, .form-actions {
+    @extend [class*="span"];
+    @extend .span4;
+  }
+}

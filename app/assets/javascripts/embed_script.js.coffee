@@ -10,10 +10,15 @@ window.Embed ||=
 # when iframe_api is loaded and ready to be used
 #   basically an initializer
 window.onYouTubeIframeAPIReady = ->
+  Embed.on_api_ready()
   Embed.player = new YT.Player(Embed.player_id,
     height: "100%"
     width: "100%"
     videoId: Embed.video
+    
+    playerVars:
+      wmode: "opaque"
+    
     events:
       onReady: onPlayerReady
       onStateChange: onPlayerStateChange
@@ -47,6 +52,12 @@ Embed.on_pause  = ->
 Embed.on_complete = ->
   Embed.stop_timer()
   Embed.state_complete(4)
+  if Embed.ad_after
+    ad_after = $("#after-video")
+    ad_after.attr("class","active")
+    $("#close-button").on "click", ->
+      ad_after.attr("class","")
+
 
 Embed.stop_timer  = ->
   clearInterval Embed.timer  
@@ -87,6 +98,8 @@ Embed.interval = ->
 
   Embed.state_complete state
 
+Embed.on_api_ready = ->
+  # nothing here
 
 
 

@@ -1,21 +1,126 @@
 
 @import "normalize";
 
+@import "font-awesome";
+
+@import "mixins";
+
+
+
+$youtube-black    : rgb(27, 27, 27);
+$white            : #FFFFFF;
+$ad-bottom-height : 61px;
+
 html, body, #player{
-  position:absolute;
-  height:100%;
-  width:100%;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
+  position    : absolute;
+  height      : 100%;
+  width       : 100%;
+  top         : 0;
+  right       : 0;
+  bottom      : 0;
+  left        : 0;
+  background  : $white;
 }
+
+// class
+.lift-bottom-for-ad{
+  .with-ad &{
+    bottom  : $ad-bottom-height;
+  }
+}
+.display-table{
+  display: table;
+}
+.display-table-row{
+  display: table-row;
+}
+.display-table-row{
+  display: table-cell;
+}
+
 iframe{
-  width:100% !important;
-  height:100% !important;
+  width   : 100% !important;
+  height  : 100% !important;
 }
 
 img{
-  position: absolute;
-  left: -9999px;
+  position  : absolute;
+  left      : -9999px;
 }
+
+.iframe-container{
+  @include full-page;
+
+  @extend .lift-bottom-for-ad;
+}
+
+#footer-bottom{
+  @include full-page;
+  top       : auto;
+  height    : $ad-bottom-height;
+  display   : table;
+  width     : 100%;
+  >div{
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    >div{
+    }
+  }
+}
+
+#after-video{
+  @include full-page;
+  z-index: -2;
+  opacity:0;
+  @extend .lift-bottom-for-ad;
+  @include transitionLong(opacity z-index, 0.1s);
+  background: #060606;
+  background: rgba(black, 0.85);
+
+  &.active{
+    z-index: 99999;
+    // transition
+    display: block;
+    opacity: 1;
+    @include transitionLong(opacity z-index, 2s);
+  }
+  #after-video-inner{
+    color:white;
+    text-align: center;
+    z-index: -1;
+    @include full-page(10%);
+
+    .display-table{
+      width: 100%;
+      height: 100%;
+      .display-table-cell{
+        width: 100%;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+
+  }
+
+  $close-button-size  : 24px;
+  #close-button{
+    position: absolute;
+    top:-$close-button-size / 3;
+    right:-$close-button-size / 3;
+    width:$close-button-size;
+    height:$close-button-size;
+    cursor: pointer;
+    i{
+      font-size: $close-button-size;
+      line-height: $close-button-size;
+    }
+  }
+
+}
+
+
+
+
+

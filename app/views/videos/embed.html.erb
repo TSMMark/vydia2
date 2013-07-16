@@ -1,12 +1,41 @@
+<div class="iframe-container">
 <div id="player"></div>
+</div>
+
+<% unless @video.ad_bottom.blank? %>
+<div id="footer-bottom">
+  <div><div>
+    <%= @video.ad_bottom.html_safe %>
+  </div></div>
+</div>
+<% end %>
+
+<% unless @video.ad_after.blank? %>
+<div id="after-video" style="">
+  <div id="after-video-inner">
+    
+    <div class="display-table">
+      <div class="display-table-cell">
+        <%= @video.ad_after.html_safe %>
+      </div>
+    </div>
+
+    <div id="close-button">
+      <i class="icon-remove-circle"></i>
+    </div>
+
+  </div>
+</div>
+<% end %>
 
 <script type="text/javascript">
   window.Embed = window.Embed || {};
+  window.Embed["ad_bottom"] = <%= @video.ad_bottom.blank? ? "false" : "true" %>
+  window.Embed["ad_after"]  = <%= @video.ad_after.blank? ? "false" : "true" %>
   window.Embed["video"]         = "<%= @video.token %>";
   window.Embed["network"]       = "<%= @network.token %>";
   window.Embed["tracking_url"]  = "<%= tracking_url @video, @network, :view %>";
   window.Embed["player_id"]     = "player";
   window.Embed["player"]        = null;
 </script>
-
 

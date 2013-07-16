@@ -21,6 +21,8 @@
 //  
 //= require variables
 //= require helpers
+//
+//= require document_ready
 //  
 //  
 //  require_tree .

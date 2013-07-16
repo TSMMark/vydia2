@@ -1,7 +1,8 @@
 class Video < ActiveRecord::Base
   include VideosHelper
 
-  attr_accessible :token, :name, :cpm
+  attr_accessible :token, :name, :cpm,
+                  :ad_after, :ad_bottom
 
   belongs_to :user, inverse_of: :videos
 
