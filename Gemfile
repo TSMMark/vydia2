@@ -35,6 +35,8 @@ gem 'bootstrap-sass', '~> 2.2.2.0'
 gem 'font-awesome-rails'
 
 gem 'jquery-rails'
+gem 'zepto-rails', :github => 'frontfoot/zepto-rails'
+
 gem 'devise'
 
 gem 'blank_pixel', git: 'git://github.com/thegillis/blank_pixel.git'

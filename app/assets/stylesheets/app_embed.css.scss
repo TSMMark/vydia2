@@ -1,5 +1,6 @@
 
 @import "normalize";
+@import "mixins";
 
 $youtube-black    : rgb(27, 27, 27);
 $white            : #FFFFFF;
@@ -15,6 +16,23 @@ html, body, #player{
   left        : 0;
   background  : $white;
 }
+
+// class
+.lift-bottom-for-ad{
+  .with-ad &{
+    bottom  : $ad-bottom-height;
+  }
+}
+.display-table{
+  display: table;
+}
+.display-table-row{
+  display: table-row;
+}
+.display-table-row{
+  display: table-cell;
+}
+
 iframe{
   width   : 100% !important;
   height  : 100% !important;
@@ -26,25 +44,52 @@ img{
 }
 
 .iframe-container{
-  position  : absolute;
-  top       : 0;
-  right     : 0;
-  bottom    : 0;
-  left      : 0;
+  @include full-page;
 
-  &.with-ad{
-    bottom  : $ad-bottom-height;
-  }
+  @extend .lift-bottom-for-ad;
 }
 
 #footer-bottom{
-  display   : block;
-  position  : absolute;
-  padding   : 0;
-  margin    : 0;
-  right     : 0;
-  bottom    : 0;
-  left      : 0;
+  @include full-page;
+  top       : auto;
   height    : $ad-bottom-height;
 }
+
+#after-video{
+  @include full-page;
+  z-index: -2;
+  opacity:0;
+  @extend .lift-bottom-for-ad;
+  @include transitionLong(opacity z-index, 1s);
+  background: rgba(black, 0.85);
+
+  &.active{
+    z-index: 99999;
+    // transition
+    display: block;
+    opacity: 1;
+    @include transitionLong(opacity z-index, 2s);
+  }
+  #after-video-inner{
+    color:white;
+    text-align: center;
+    z-index: -1;
+    @include full-page(10%);
+
+    .display-table{
+      width: 100%;
+      height: 100%;
+      .display-table-cell{
+        width: 100%;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+
+  }
+}
+
+
+
+
 

@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/frontfoot/zepto-rails.git
+  revision: ca71163613f201ddfca1189d2173a1e2f9e72d73
+  specs:
+    zepto-rails (0.8.0)
+      rails (>= 3.1.0)
+
+GIT
   remote: git://github.com/rweng/jquery-datatables-rails.git
   revision: 494f752b8eb8350f33841c822a67d014c869219f
   specs:
@@ -159,3 +166,4 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   uniquify-uuid
+  zepto-rails!

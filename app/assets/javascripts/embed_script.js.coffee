@@ -15,6 +15,10 @@ window.onYouTubeIframeAPIReady = ->
     height: "100%"
     width: "100%"
     videoId: Embed.video
+    
+    playerVars:
+      wmode: "opaque"
+    
     events:
       onReady: onPlayerReady
       onStateChange: onPlayerStateChange
@@ -48,6 +52,9 @@ Embed.on_pause  = ->
 Embed.on_complete = ->
   Embed.stop_timer()
   Embed.state_complete(4)
+  if Embed.ad_after
+    document.getElementById("after-video").setAttribute("class","active")
+
 
 Embed.stop_timer  = ->
   clearInterval Embed.timer  
