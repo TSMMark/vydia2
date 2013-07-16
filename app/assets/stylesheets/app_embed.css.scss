@@ -76,6 +76,7 @@ img{
   opacity:0;
   @extend .lift-bottom-for-ad;
   @include transitionLong(opacity z-index, 0.1s);
+  background: #060606;
   background: rgba(black, 0.85);
 
   &.active{
