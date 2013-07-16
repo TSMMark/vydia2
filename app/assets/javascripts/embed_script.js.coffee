@@ -53,7 +53,10 @@ Embed.on_complete = ->
   Embed.stop_timer()
   Embed.state_complete(4)
   if Embed.ad_after
-    document.getElementById("after-video").setAttribute("class","active")
+    ad_after = $("#after-video")
+    ad_after.attr("class","active")
+    $("#close-button").on "click", ->
+      ad_after.attr("class","")
 
 
 Embed.stop_timer  = ->

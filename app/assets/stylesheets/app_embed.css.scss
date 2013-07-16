@@ -1,6 +1,11 @@
 
 @import "normalize";
+
+@import "font-awesome";
+
 @import "mixins";
+
+
 
 $youtube-black    : rgb(27, 27, 27);
 $white            : #FFFFFF;
@@ -60,7 +65,7 @@ img{
   z-index: -2;
   opacity:0;
   @extend .lift-bottom-for-ad;
-  @include transitionLong(opacity z-index, 1s);
+  @include transitionLong(opacity z-index, 0.1s);
   background: rgba(black, 0.85);
 
   &.active{
@@ -87,6 +92,21 @@ img{
     }
 
   }
+
+  $close-button-size  : 24px;
+  #close-button{
+    position: absolute;
+    top:-$close-button-size / 3;
+    right:-$close-button-size / 3;
+    width:$close-button-size;
+    height:$close-button-size;
+    cursor: pointer;
+    i{
+      font-size: $close-button-size;
+      line-height: $close-button-size;
+    }
+  }
+
 }
 
 

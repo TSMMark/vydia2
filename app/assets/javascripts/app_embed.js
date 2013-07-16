@@ -1,3 +1,4 @@
+//= require zepto/default
 //= require variables
 //= require helpers
 //  
