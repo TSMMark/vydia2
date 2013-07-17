@@ -22,20 +22,6 @@ table{
 	padding:60px 5%;
 }
 
-// .navbar-inner{
-// 	@include box-shadow(none !important);
-// 	border:0;
-// }
-
-// .footer{
-// 	margin-top: 50px;
-// 	color: $grayLight;
-// 	a{
-// 		color:$gray;
-// 	}
-// }
-
-
 a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
   text-decoration: none;
   color: $icon-color;
@@ -65,4 +51,11 @@ a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
     @extend [class*="span"];
     @extend .span4;
   }
+}
+
+
+// 
+.generated-code-container textarea{
+  cursor: pointer;
+  overflow: hidden;
 }
