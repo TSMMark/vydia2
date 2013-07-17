@@ -1,10 +1,29 @@
 <h2><%= link_to @video.name, @video.link, target: :_blank %></h2>
-<p>
-  <b>Token:</b> <%= @video.token %>
-</p>
-<p>
-  <b>Bid CPM:</b> <%= Money.new(@video.cpm).with_symbol %>
-</p>
+
+
+<div class="row">
+  <div class="info-column">
+    <%= image_tag @video.yt_thumb %>
+  </div>
+
+</div>
+<div class="row">
+  <div class="info-column">
+    <label>Token:</label> <%= @video.token %>
+  </div>
+
+  <div class="info-column">
+    <label>Bid CPM:</label> <%= Money.new(@video.cpm).with_symbol %>
+  </div>
+
+  <div class="info-column">
+    <label>YouTube Rating:</label> <%= @video.yt_rating.round(2) %> / 100
+  </div>
+
+  <div class="info-column">
+    <label>YouTube Views:</label> <%= @video.yt_view_count %>
+  </div>
+</div>
 
 <h3>Featured on:</h3>
 <%= render 'networks' %>

@@ -71,3 +71,14 @@ a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
   cursor: pointer;
   overflow: hidden;
 }
+
+
+.info-column{
+  @extend [class*="span"];
+  @extend .span3;
+  text-align: center;
+  label{
+    display: block;
+    @extend strong;
+  }
+}

@@ -79,14 +79,13 @@ class Youtube
 
   def self.get_gdata token
     url     = Youtube.gdata_url(token)
-    begin
+    # begin
       body  = Youtube.response_body url
       hash  = JSON.parse(body)
       hash  = hash["entry"]
-      puts hash
-    rescue
-      return nil
-    end
+    # rescue
+    #   return nil
+    # end
     return hash
   end
 

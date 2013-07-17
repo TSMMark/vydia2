@@ -3,11 +3,12 @@
 
   <div class="form-inputs">
     <%= f.input :token, label: '<strong>Paste YouTube Link</strong>' %>
-    <%= f.input :name %>
+    <%= f.input :name, label: 'Name (leave blank to grab from YouTube)' %>
   </div>
   
   <div class="form-inputs">
-    <%= f.input :cpm, label: 'Bid CPM' %>
+    <%= f.input :cpm, label: 'Bid CPM $',
+        :input_html => { :value => '80.00'} %>
   </div>
 
   <h3>Ad Placement (html)</h3>

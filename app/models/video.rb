@@ -2,11 +2,13 @@ class Video < ActiveRecord::Base
   include VideosHelper
 
   attr_accessible :token, :name, :cpm,
-                  :ad_after, :ad_bottom
+                  :ad_after, :ad_bottom,
+                  :yt_thumb, :yt_rating,
+                  :yt_view_count, :yt_favorite_count
 
   belongs_to :user, inverse_of: :videos
 
-  validates_presence_of :name, :token
+  validates_presence_of :name, :token, :cpm
   validates_uniqueness_of :token
 
   has_many :impressions, inverse_of: :video
