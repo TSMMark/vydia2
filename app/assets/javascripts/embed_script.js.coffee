@@ -52,12 +52,24 @@ Embed.on_pause  = ->
 Embed.on_complete = ->
   Embed.stop_timer()
   Embed.state_complete(4)
-  if Embed.ad_after
-    ad_after = $("#after-video")
-    ad_after.attr("class","active")
+  if Embed.ad["after"] is true
+    Embed.ad_after.set()
+    Embed.ad_after.show()
     $("#close-button").on "click", ->
-      ad_after.attr("class","")
+      Embed.ad_after.hide()
 
+Embed.$ad_after = null
+Embed.ad_after =
+  set: ->
+    Embed.$ad_after = $("#after-video")
+  show: ->
+    Embed.$ad_after.attr("class","active")
+    if Helper.is_mobile()
+      Embed.player.a.style.display = "none"
+  hide: ->
+    Embed.$ad_after.attr("class","")
+    if Helper.is_mobile()
+      Embed.player.a.style.display = ""
 
 Embed.stop_timer  = ->
   clearInterval Embed.timer  

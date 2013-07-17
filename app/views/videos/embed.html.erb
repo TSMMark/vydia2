@@ -24,8 +24,10 @@
 
 <script type="text/javascript">
   window.Embed = window.Embed || {};
-  window.Embed["ad_bottom"] = <%= @video.ad_bottom.blank? ? "false" : "true" %>
-  window.Embed["ad_after"]  = <%= @video.ad_after.blank? ? "false" : "true" %>
+  window.Embed["ad"] = {
+    "bottom"  : <%= @video.ad_bottom.blank? ? "false" : "true" %>,
+    "after"   : <%= @video.ad_after.blank? ? "false" : "true" %>
+  }
   window.Embed["video"]         = "<%= @video.token %>";
   window.Embed["network"]       = "<%= @network.token %>";
   window.Embed["tracking_url"]  = "<%= tracking_url @video, @network, :view %>";
