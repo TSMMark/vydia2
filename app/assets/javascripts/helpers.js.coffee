@@ -2,7 +2,7 @@
 
 window.Helper =
   embed_code: (video, network, ad_bottom=false)->
-    extra_height  = !!ad_bottom
+    extra_height  = true # !!ad_bottom
     height        = Var.iframe.default_height
     height       += Var.iframe.ad_bottom_height if extra_height
     width         = Var.iframe.default_width
