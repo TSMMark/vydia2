@@ -4,9 +4,7 @@
 
 <% unless @video.ad_bottom.blank? %>
 <div id="footer-bottom">
-  <div><div>
-    <%= @video.ad_bottom.html_safe %>
-  </div></div>
+  <%= @video.ad_bottom.html_safe %>
 </div>
 <% end %>
 
@@ -14,11 +12,7 @@
 <div id="after-video" style="">
   <div id="after-video-inner">
     
-    <div class="display-table">
-      <div class="display-table-cell">
-        <%= @video.ad_after.html_safe %>
-      </div>
-    </div>
+    <%= @video.ad_after.html_safe %>
 
     <div id="close-button">
       <i class="icon-remove-circle"></i>

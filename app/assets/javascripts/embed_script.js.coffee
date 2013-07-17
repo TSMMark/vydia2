@@ -73,7 +73,7 @@ Embed.state_complete = (state)->
 
 Embed.send_state = ->
   src = Embed.get_state_url()
-  f   = document.getElementsByTagName("img")[0]
+  f   = $("body>img")[0]
 
   # don't add if already there
   return false unless f.src.indexOf(src) is -1

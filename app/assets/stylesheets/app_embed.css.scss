@@ -20,6 +20,7 @@ html, body, #player{
   bottom      : 0;
   left        : 0;
   background  : $white;
+  overflow: hidden;
 }
 
 // class
@@ -43,7 +44,8 @@ iframe{
   height  : 100% !important;
 }
 
-img{
+// hide tracking icons
+body > img{
   position  : absolute;
   left      : -9999px;
 }
@@ -58,15 +60,10 @@ img{
   @include full-page;
   top       : auto;
   height    : $ad-bottom-height;
-  display   : table;
   width     : 100%;
-  >div{
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0;
-    margin: 0;
-    >div{
-    }
+  img{
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -84,7 +81,7 @@ img{
     // transition
     display: block;
     opacity: 1;
-    @include transitionLong(opacity z-index, 1s);
+    @include transitionLong(opacity z-index, 0.3s);
   }
   #after-video-inner{
     color:white;
@@ -92,20 +89,15 @@ img{
     z-index: -1;
     @include full-page(10%);
 
-    .display-table{
-      width: 100%;
+    img{
+      width:100%;
       height: 100%;
-      .display-table-cell{
-        width: 100%;
-        vertical-align: middle;
-        text-align: center;
-      }
     }
-
   }
 
   $close-button-size  : 24px;
   #close-button{
+    z-index: 99999999;
     position: absolute;
     top:-$close-button-size / 3;
     right:-$close-button-size / 3;
