@@ -84,7 +84,7 @@ img{
     // transition
     display: block;
     opacity: 1;
-    @include transitionLong(opacity z-index, 2s);
+    @include transitionLong(opacity z-index, 1s);
   }
   #after-video-inner{
     color:white;
