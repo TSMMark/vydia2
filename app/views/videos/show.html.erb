@@ -1,27 +1,30 @@
-<h2><%= link_to @video.name, @video.link, target: :_blank %></h2>
-
-
 <div class="row">
-  <div class="info-column">
-    <%= image_tag @video.yt_thumb %>
+  <div class="span12">
+    <h2><%= link_to @video.name, @video.link, target: :_blank %></h2>
   </div>
-
 </div>
-<div class="row">
-  <div class="info-column">
-    <label>Token:</label> <%= @video.token %>
-  </div>
 
+<div class="row">
   <div class="info-column">
     <label>Bid CPM:</label> <%= Money.new(@video.cpm).with_symbol %>
   </div>
 
   <div class="info-column">
-    <label>YouTube Rating:</label> <%= @video.yt_rating.round(2) %> / 100
+    <label>YT Rating:</label> <%= @video.yt_rating.round(2) %> / 100
   </div>
 
   <div class="info-column">
-    <label>YouTube Views:</label> <%= @video.yt_view_count %>
+    <label>YT Views:</label> <%= @video.yt_view_count %>
+  </div>
+
+  <div class="info-column">
+    <label>YT Token:</label> <%= @video.token %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <%= @video.thumb_element_hover thumb: {link_to: :player} %>
   </div>
 </div>
 

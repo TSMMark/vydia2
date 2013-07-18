@@ -11,6 +11,35 @@
   left:$padding;
 }
 
+.zero-edge{
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+}
+
+@mixin no-margin {
+  margin:0;
+  padding:0;
+}
+
+@mixin list-no-margin {
+  @include no-margin;
+  list-style:none;
+  li{
+    @include no-margin;
+    list-style:none;
+  }
+}
+
+@mixin icon-size($size:14px){
+  width:$size;
+  height:$size;
+  line-height:$size;
+  font-size:$size;
+  background-position:$size, $size;
+}
 
 
 

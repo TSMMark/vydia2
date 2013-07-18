@@ -1,8 +1,11 @@
-class Video < ActiveRecord::Base
+class Video < BaseModel
   include VideosHelper
+
+  include_helpers
 
   attr_accessible :token, :name, :cpm,
                   :ad_after, :ad_bottom,
+                  :yt_title,
                   :yt_thumb, :yt_rating,
                   :yt_view_count, :yt_favorite_count
 
@@ -27,6 +30,36 @@ class Video < ActiveRecord::Base
     super.group('networks.id').all
   end
 
+  # youtube stats
+  def score
+    yt_rating.round
+  end
+
+  def thumb_element_hover options={thumb:{}}
+    options[:class] = "#{options[:class]} thumb-hover"
+    content_tag(:div,
+      thumb_element(options[:thumb]),
+      options
+    ).html_safe
+    
+  end
+
+  def thumb_element options={}
+    options         ||= {}
+    options[:alt]   = yt_title if options[:alt]   == nil
+    options[:title] = yt_title if options[:title] == nil
+    options[:style] = "#{options[:style]} background-image:url(#{yt_thumb});"
+    options[:class] = "#{options[:class]} video-thumb"
+    href    = (options[:link_to] == :player) ? self.link : video_path(self)
+    target  = (options[:link_to] == :player) ? '_blank' : '_self'
+
+    content_tag(:a,
+      content_tag(:div, nbsp, options).html_safe,
+      href: href, target: target
+    ).html_safe
+  end
+
+  # internal counts
   def impressions network=nil, o={}
     o[:unique] = true if o[:unique].nil?
     i = super()

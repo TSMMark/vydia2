@@ -1,4 +1,4 @@
-class Network < ActiveRecord::Base
+class Network < BaseModel
   attr_accessible :name
 
   validates_presence_of :name

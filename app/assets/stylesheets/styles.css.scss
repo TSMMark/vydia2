@@ -5,8 +5,8 @@ $myBreakSmall: 488px;
 
 table{
   @extend .table;
-  @extend .table-bordered;
-  @extend .table-striped;
+  // @extend .table-bordered;
+  // @extend .table-striped;
 
   tbody tr.info td, tbody tr.info th,
   tfoot tr.info td, tfoot tr.info th {
@@ -16,6 +16,74 @@ table{
   .totals{
     @extend .info
   }
+  .crud-icons{
+    text-align: right;
+    font-size: 20px;
+    i{
+      margin-right:4px;
+    }
+  }
+}
+$thumb-height:66px;
+$thumb-width:120px;
+$thumb-padding-v:16px;
+$thumb-padding-h:8px;
+table.thumbed-table{
+  tr td:first-child {
+    width: 40%;
+  }
+  tbody{
+    tr{
+      height: $thumb-height + ($thumb-padding-v * 2);
+    }
+    td{
+      position: relative;
+      vertical-align: middle;
+      &:first-child {
+        .thumb-title {
+          margin-left: $thumb-width + ($thumb-padding-h);
+        }
+        .row-thumb{
+          position: absolute;
+          top:$thumb-padding-v;
+          left:$thumb-padding-h;
+        }
+      }
+    }
+  }
+}
+[class*=-thumb]{
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+table.videos-table{
+  @extend .thumbed-table;
+  .thumb-hover{
+    @extend .row-thumb;
+  }
+}
+
+@mixin hover-expand($init-w, $init-h, $mult:2){
+  @include transition( (width, height, margin), 0.5s);
+  width   : $init-w;
+  height  : $init-h;
+  &:hover{
+    width: $init-w * 2;
+    height: $init-h * 2;
+    margin-top: $init-h / -2;
+    z-index: 9;
+    @include transition( (width, height, margin), 0.5s);
+  }
+}
+
+.thumb-hover{
+  @include hover-expand($thumb-width,$thumb-height);
+}
+.video-thumb{
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  height:100%;
+  width:100%;
 }
 
 .hero-unit{
