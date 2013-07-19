@@ -8,6 +8,7 @@ describe Hash do
 
     context 'no bang' do
       let (:new_hash) { hash.fill_with(new_value, keys) }
+
       context 'when no keys specified' do
         let (:keys)     { nil }
         it 'replaces values with new value' do
@@ -55,21 +56,22 @@ describe Hash do
 
 
     context 'bang!' do
+      let (:new_hash) { hash.fill_with!(new_value, keys) }
+
       context 'when no keys specified' do
+        let (:keys)     { nil }
         it 'replaces values with new value' do
-          hash.fill_with!(new_value).each do |k,val|
-            val.should == new_value
+          new_hash.each do |k,val|
+            val.should  == new_value
           end
         end
         it 'alters original hash' do
-          hash.fill_with!(new_value)
-          hash.should_not   == original_hash
+          hash.should     == new_hash
         end
       end
       context 'when an array of keys specified' do
-        let(:keys){[:somekey, :yetanother]}
+        let (:keys)     { [:somekey, :yetanother] }
         it 'replaces values with new value' do
-          new_hash  = hash.fill_with!(new_value, keys)
           new_hash.each do |key,val|
             if keys.include? key
               val.should      == new_value
@@ -79,14 +81,12 @@ describe Hash do
           end
         end
         it 'alters original hash' do
-          hash.fill_with!(new_value, keys)
-          hash.should_not   == original_hash
+          hash.should     == new_hash
         end
       end
       context 'when one key specified' do
-        let(:keys){:somekey}
+        let (:keys)     { :somekey }
         it 'replaces values with new value' do
-          new_hash  = hash.fill_with!(new_value, keys)
           new_hash.each do |key,val|
             if key == keys
               val.should      == new_value
@@ -96,10 +96,9 @@ describe Hash do
           end
         end
         it 'alters original hash' do
-          hash.fill_with!(new_value, keys)
-          hash.should_not   == original_hash
+          hash.should     == new_hash
         end
-      end      
+      end
     end
 
 
