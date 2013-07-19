@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe User do
-  before do
-  end
 
   context 'when registering' do
     context 'a trendsetter' do
@@ -14,7 +12,7 @@ describe User do
 
     context 'a non-trendsetter' do
       it 'can\'t register' do
-        expect {FactoryGirl.create(:user_non_trendsetter)}.to raise_error
+        expect { FactoryGirl.create(:user_non_trendsetter) }.to raise_error
       end
     end
 

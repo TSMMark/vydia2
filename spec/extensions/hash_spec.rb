@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe Hash do
+  let (:original_hash)  { {somekey: :somevalue, anotherkey: :anothervalue, yetanother: :yetvalue} }
+  let (:hash)           { original_hash.clone }
+
   describe 'fill_with(!)' do
-    let (:original_hash)  { {somekey: :somevalue, anotherkey: :anothervalue, yetanother: :yetvalue} }
-    let (:hash)           { original_hash.clone }
     let (:new_value)      { 'new value' }
 
-    context 'no bang' do
+    describe 'no bang' do
       let (:new_hash) { hash.fill_with(new_value, keys) }
 
       context 'when no keys specified' do
@@ -55,7 +56,7 @@ describe Hash do
     end
 
 
-    context 'bang!' do
+    describe 'bang!' do
       let (:new_hash) { hash.fill_with!(new_value, keys) }
 
       context 'when no keys specified' do
@@ -100,7 +101,94 @@ describe Hash do
         end
       end
     end
+  end
+  # .. fill_with(!)
 
+  describe 'delete_keys(!)' do
+
+    describe 'no bang' do
+      let (:new_hash)   { hash.delete_keys(keys) }
+
+      context 'when an array of keys' do
+        let (:keys)       { [:somekey, :yetanother] }
+
+        it 'previously contained the keys' do
+          keys.each do |k|
+            hash.should be_include(k)
+          end
+        end
+        it 'removes keys from hash' do
+          new_hash.should have_at_least(1).items
+          new_hash.each do |k,v|
+            keys.include?(k).should be_false
+          end
+        end
+        it 'leaves original hash' do
+          new_hash.should_not   == hash
+        end
+      end
+
+      context 'when singular key' do
+        let (:keys)       { :somekey }
+
+        it 'previously contained the key' do
+          hash.should be_include(keys)
+        end
+        it 'removes key from hash' do
+          new_hash.should have_at_least(1).items
+          new_hash.each do |k,v|
+            k.should_not  == keys
+          end
+        end
+        it 'leaves original hash' do
+          new_hash.should_not   == hash
+        end
+      end
+
+    end
+
+    describe 'bang!' do
+      let (:new_hash)   { hash.delete_keys!(keys) }
+
+      context 'when an array of keys' do
+        let (:keys)       { [:somekey, :yetanother] }
+
+        it 'previously contained the keys' do
+          keys.each do |k|
+            hash.should be_include(k)
+          end
+        end
+        it 'removes keys from hash' do
+          new_hash.should have_at_least(1).items
+          new_hash.each do |k,v|
+            keys.include?(k).should be_false
+          end
+        end
+        it 'leaves original hash' do
+          new_hash.should   == hash
+        end
+      end
+
+      context 'when singular key' do
+        let (:keys)       { :somekey }
+
+        it 'previously contained the key' do
+          hash.should be_include(keys)
+        end
+        it 'removes key from hash' do
+          new_hash.should have_at_least(1).items
+          new_hash.each do |k,v|
+            k.should_not  == keys
+          end
+        end
+        it 'leaves original hash' do
+          new_hash.should   == hash
+        end
+      end
+
+    end
 
   end
+  # .. delete_keys(!)
+
 end

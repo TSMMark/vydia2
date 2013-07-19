@@ -93,7 +93,6 @@ module RailsExtensions
       end
       self
     end
-
     # fill hash with default values
     def fill_with(default=nil, keys=nil)
       a = self.clone
@@ -102,30 +101,39 @@ module RailsExtensions
     end
 
     # delete from this hash, a list of keys
-    def delete_list list
-      list.each{|k| self.delete k}
+    def delete_keys! list
+      if list.is_a? Array
+        list.map{|k| self.delete k}
+      else
+        self.delete list
+      end
+      self
+    end
+    def delete_keys list
+      self.clone.delete_keys! list
     end
 
     # returns only the key/value pairs where the key is in the matching array
-    def filter_against (matching, sensitive=false)
-      myself = self
-      final  = {}
-      if(!sensitive) then
-        myself = myself.insensitive
-        final  = final.insensitive
-      end
+    #   DISABLED UNTIL SPEC
+    # def filter_against (matching, sensitive=false)
+    #   myself = self
+    #   final  = {}
+    #   if(!sensitive) then
+    #     myself = myself.insensitive
+    #     final  = final.insensitive
+    #   end
       
-      # return complete hash if (matching==true)
-      return self if(matching==true)
-      # return empty hash if (matching==false)
-      return {}   if(matching==false)
+    #   # return complete hash if (matching==true)
+    #   return self if(matching==true)
+    #   # return empty hash if (matching==false)
+    #   return {}   if(matching==false)
       
-      final.tap do |final|
-        matching.each do |key|
-          final[key] = myself[key] if myself.has_key?(key)
-        end
-      end
-    end
+    #   final.tap do |final|
+    #     matching.each do |key|
+    #       final[key] = myself[key] if myself.has_key?(key)
+    #     end
+    #   end
+    # end
 
   end
   # .. Hash .. #
