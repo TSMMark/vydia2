@@ -82,14 +82,23 @@ module RailsExtensions
   #    Hash    #
   class ::Hash
 
-    # fill hash with default values
+    # bang fill hash with default values
     def fill_with!(default=nil, keys=nil)
       if !keys then
-        self.each_key {|key| self[key]=default}
+        self.each_key {|key| self[key]  = default}
+      elsif keys.is_a? Array
+        keys.each     {|key| self[key]  = default}
       else
-        keys.each {|key| self[key] = default}
+        self[keys]  = default
       end
       self
+    end
+
+    # fill hash with default values
+    def fill_with(default=nil, keys=nil)
+      a = self.clone
+      a.fill_with!(default, keys)
+      a
     end
 
     # delete from this hash, a list of keys
