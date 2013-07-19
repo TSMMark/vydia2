@@ -36,9 +36,11 @@ class Video < BaseModel
   end
 
   def thumb_element_hover options={thumb:{}}
-    options[:class] = "#{options[:class]} thumb-hover"
+    options[:class] = "#{options[:class]} thumb-container"
+    el = thumb_element(options[:thumb])
+    options[:thumb] = nil
     content_tag(:div,
-      thumb_element(options[:thumb]),
+      el,
       options
     ).html_safe
     
@@ -48,7 +50,7 @@ class Video < BaseModel
     options         ||= {}
     options[:alt]   = yt_title if options[:alt]   == nil
     options[:title] = yt_title if options[:title] == nil
-    options[:style] = "#{options[:style]} background-image:url(#{yt_thumb});"
+    options[:style] = "#{options[:style]} background-image:url(#{thumb "hqdefault"});"
     options[:class] = "#{options[:class]} video-thumb"
     href    = (options[:link_to] == :player) ? self.link : video_path(self)
     target  = (options[:link_to] == :player) ? '_blank' : '_self'
@@ -58,7 +60,9 @@ class Video < BaseModel
       href: href, target: target
     ).html_safe
   end
-
+  def thumb size='default'
+    Youtube.thumb yt_thumb, size
+  end
   # internal counts
   def impressions network=nil, o={}
     o[:unique] = true if o[:unique].nil?

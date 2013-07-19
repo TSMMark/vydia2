@@ -36,7 +36,7 @@ class Youtube
   end
   def self.thumb url, size="default"
     # sizes = default, mqdefault, hqdefault, sddefault, start, middle, end
-    url.gsub('%size',size)
+    url.gsub('default',size).gsub('%size',size)
   end
 
   def _thumb_url

@@ -24,10 +24,11 @@ table{
     }
   }
 }
-$thumb-height:66px;
-$thumb-width:120px;
-$thumb-padding-v:16px;
-$thumb-padding-h:8px;
+$thumb-height: 68px;
+$thumb-width: 122px;
+$thumb-padding-v: 16px;
+$thumb-padding-h: 8px;
+$thumb-border-width: 1px;
 table.thumbed-table{
   tr td:first-child {
     width: 40%;
@@ -45,50 +46,43 @@ table.thumbed-table{
         }
         .row-thumb{
           position: absolute;
-          top:$thumb-padding-v;
-          left:$thumb-padding-h;
+          top     : $thumb-padding-v;
+          left    : $thumb-padding-h;
+          width   : $thumb-width + ( $thumb-border-width * 2 );
+          height  : $thumb-height + ( $thumb-border-width * 2 );
         }
       }
     }
   }
 }
-[class*=-thumb]{
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
 table.videos-table{
   @extend .thumbed-table;
-  .thumb-hover{
+  .thumb-container{
     @extend .row-thumb;
   }
 }
 
-@mixin hover-expand($init-w, $init-h, $mult:2){
-  @include transition( (width, height, margin), 0.5s);
-  width   : $init-w;
-  height  : $init-h;
-  &:hover{
-    width: $init-w * 2;
-    height: $init-h * 2;
-    margin-top: $init-h / -2;
-    z-index: 9;
-    @include transition( (width, height, margin), 0.5s);
-  }
-}
-
-.thumb-hover{
-  @include hover-expand($thumb-width,$thumb-height);
+.thumb-container{
+  width   : $thumb-width + ( $thumb-border-width * 2 );
+  height  : $thumb-height + ( $thumb-border-width * 2 );
 }
 .video-thumb{
-  display: inline-block;
   background-size: cover;
   background-position: center;
-  height:100%;
-  width:100%;
+  border  : $thumb-border-width solid rgba(0, 0, 0, 0.5);
+  @include hover-expand($thumb-width, $thumb-height);
 }
 
 .hero-unit{
 	padding:60px 5%;
 }
+
+
+
+
+
+
+
 
 a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
   text-decoration: none;
