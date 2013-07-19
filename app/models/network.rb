@@ -4,11 +4,7 @@ class Network < BaseModel
   validates_presence_of :name
 
   uniquify :token do
-    all_numbers = /^[0-9]+$/
-    begin
-      token = SecureRandom.uuid.split('-').first
-    end while token =~ all_numbers
-    token
+    generate_token
   end
 
   has_many :impressions, inverse_of: :network
@@ -23,7 +19,6 @@ class Network < BaseModel
       return find_by_token id
     end
   end
-
 
   def videos
     super.group('videos.id').all
@@ -116,6 +111,16 @@ class Network < BaseModel
     0.50
   end
 
+
+  # generate a random token via uuid
+  def self.generate_token
+    # make sure the token has non-digit characters
+    #   this prevents find(id) from getting confused
+    begin
+      token = SecureRandom.uuid.split('-').first
+    end while token.numeric?
+    token
+  end
 
 
 end

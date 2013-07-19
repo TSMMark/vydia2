@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Impression do
+describe Float do
   
 end

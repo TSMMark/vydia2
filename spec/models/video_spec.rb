@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Video do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+  end
+
+  context 'when creating' do
+    
+  end
 end

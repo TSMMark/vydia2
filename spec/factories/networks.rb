@@ -2,5 +2,9 @@
 
 FactoryGirl.define do
   factory :network do
+    name
   end
+  factory :network_default, parent: :network do
+  end
+
 end

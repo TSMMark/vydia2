@@ -1,8 +1,9 @@
 module RailsExtensions
   
   class ::String
+
     def numeric?
-      !self.match(/[^0-9]/)
+      self.match(/^[0-9]+\z/)
     end
 
     def positive_integer?
@@ -10,7 +11,7 @@ module RailsExtensions
     end
 
     def nonnegative_integer?
-      self.to_i > 0 or self == '0'
+      self.to_i >= 0
     end
 
     # parameters / arguments
