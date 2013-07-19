@@ -24,6 +24,16 @@ $dark-text:                       #333;
   @return rgba($color, 0.1);
 }
 
+@function dark($color){
+  @return darken($color, 25%);
+}
+@function darker($color){
+  @return darken($color, 50%);
+}
+@function darkest($color){
+  @return darken($color, 75%);
+}
+
 
 $green:                           rgb(69,   146,  52);
 $red:                             rgb(203,  44,   42);
@@ -33,7 +43,7 @@ $orange:                          rgb(232,  172,  0);
 $pink:                            rgb(229,  0,    124);
 $purple:                          rgb(69,   50,   91);
 
-$icon-color:                      $purple;
+$icon-color:                      darkest($blue);
 
 $bodyBackground:                  $off-white;
 $textColor:                       $dark-text;

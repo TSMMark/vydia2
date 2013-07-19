@@ -1,4 +1,4 @@
-class Impression < ActiveRecord::Base
+class Impression < BaseModel
   attr_accessible :ip_address, :network_id, :referer, :request_url, :user_agent, :video_id
 
   belongs_to :video, inverse_of: :impressions

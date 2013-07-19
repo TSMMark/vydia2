@@ -1,12 +1,17 @@
-class Video < ActiveRecord::Base
+class Video < BaseModel
   include VideosHelper
 
+  include_helpers
+
   attr_accessible :token, :name, :cpm,
-                  :ad_after, :ad_bottom
+                  :ad_after, :ad_bottom,
+                  :yt_title,
+                  :yt_thumb, :yt_rating,
+                  :yt_view_count, :yt_favorite_count
 
   belongs_to :user, inverse_of: :videos
 
-  validates_presence_of :name, :token
+  validates_presence_of :name, :token, :cpm
   validates_uniqueness_of :token
 
   has_many :impressions, inverse_of: :video
@@ -25,6 +30,40 @@ class Video < ActiveRecord::Base
     super.group('networks.id').all
   end
 
+  # youtube stats
+  def score
+    yt_rating.round
+  end
+
+  def thumb_element_hover options={thumb:{}}
+    options[:class] = "#{options[:class]} thumb-container"
+    el = thumb_element(options[:thumb])
+    options[:thumb] = nil
+    content_tag(:div,
+      el,
+      options
+    ).html_safe
+    
+  end
+
+  def thumb_element options={}
+    options         ||= {}
+    options[:alt]   = yt_title if options[:alt]   == nil
+    options[:title] = yt_title if options[:title] == nil
+    options[:style] = "#{options[:style]} background-image:url(#{thumb "hqdefault"});"
+    options[:class] = "#{options[:class]} video-thumb"
+    href    = (options[:link_to] == :player) ? self.link : video_path(self)
+    target  = (options[:link_to] == :player) ? '_blank' : '_self'
+
+    content_tag(:a,
+      content_tag(:div, nbsp, options).html_safe,
+      href: href, target: target
+    ).html_safe
+  end
+  def thumb size='default'
+    Youtube.thumb yt_thumb, size
+  end
+  # internal counts
   def impressions network=nil, o={}
     o[:unique] = true if o[:unique].nil?
     i = super()

@@ -2,12 +2,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :token, label: 'YouTube Link' %>
+    <%= f.input :token, label: '<strong>Paste YouTube Link</strong>' %>
+    <%= f.input :name, label: 'Name (leave blank to grab from YouTube)' %>
   </div>
   
   <div class="form-inputs">
-    <%= f.input :cpm, label: 'Bid CPM' %>
+    <%= f.input :cpm, label: 'Bid CPM $',
+        :input_html => { :value => '80.00'} %>
   </div>
 
   <h3>Ad Placement (html)</h3>
@@ -15,6 +16,9 @@
     <%= f.input :ad_after, as: :text,
         label: 'After Video', input_html:
           {rows: 5} %>
+  </div>
+  
+  <div class="form-inputs">
     <%= f.input :ad_bottom, as: :text,
         label: 'During Video (bottom)', input_html:
           {rows: 5} %>

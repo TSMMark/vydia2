@@ -1,4 +1,4 @@
-class Play < ActiveRecord::Base
+class Play < BaseModel
 
   attr_accessible :impression_id, :seconds_passed, :state
 

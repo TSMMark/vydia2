@@ -1,4 +1,23 @@
 
+@mixin hover-expand($init-w, $init-h, $mult:4){
+  display: block;
+  position: absolute;
+  @include transition-property(width, height, margin, z-index);
+  @include transition-duration(0.5s);
+  width   : $init-w;
+  height  : $init-h;
+  margin-top: 0;
+  &:hover{
+    width: $init-w * $mult;
+    height: $init-h * $mult;
+    margin-top: ($init-h * $mult / -2) + ($init-h / 2);
+    z-index: 9;
+    @include transition-property(width, height, margin);
+    @include transition-delay(0.5s);
+    @include transition-duration(0.5s);
+  }
+}
+
 
 @mixin full-page($padding:0){
   display   : block;
@@ -11,6 +30,35 @@
   left:$padding;
 }
 
+.zero-edge{
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+}
+
+@mixin no-margin {
+  margin:0;
+  padding:0;
+}
+
+@mixin list-no-margin {
+  @include no-margin;
+  list-style:none;
+  li{
+    @include no-margin;
+    list-style:none;
+  }
+}
+
+@mixin icon-size($size:14px){
+  width:$size;
+  height:$size;
+  line-height:$size;
+  font-size:$size;
+  background-position:$size, $size;
+}
 
 
 
