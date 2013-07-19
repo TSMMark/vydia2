@@ -50,6 +50,13 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 
 gem 'money-rails'
 
+
+# SPEC
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+end
+gem 'factory_girl_rails', '~> 4.0', :require => false
+
 # gem 'paperclip', "~> 3.0"
 # gem 'aws-sdk'
 # gem 'faker'
