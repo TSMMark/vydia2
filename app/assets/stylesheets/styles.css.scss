@@ -5,8 +5,8 @@ $myBreakSmall: 488px;
 
 table{
   @extend .table;
-  @extend .table-bordered;
-  @extend .table-striped;
+  // @extend .table-bordered;
+  // @extend .table-striped;
 
   tbody tr.info td, tbody tr.info th,
   tfoot tr.info td, tfoot tr.info th {
@@ -16,11 +16,73 @@ table{
   .totals{
     @extend .info
   }
+  .crud-icons{
+    text-align: right;
+    font-size: 20px;
+    i{
+      margin-right:4px;
+    }
+  }
+}
+$thumb-height: 68px;
+$thumb-width: 122px;
+$thumb-padding-v: 16px;
+$thumb-padding-h: 8px;
+$thumb-border-width: 1px;
+table.thumbed-table{
+  tr td:first-child {
+    width: 40%;
+  }
+  tbody{
+    tr{
+      height: $thumb-height + ($thumb-padding-v * 2);
+    }
+    td{
+      position: relative;
+      vertical-align: middle;
+      &:first-child {
+        .thumb-title {
+          margin-left: $thumb-width + ($thumb-padding-h);
+        }
+        .row-thumb{
+          position: absolute;
+          top     : $thumb-padding-v;
+          left    : $thumb-padding-h;
+          width   : $thumb-width + ( $thumb-border-width * 2 );
+          height  : $thumb-height + ( $thumb-border-width * 2 );
+        }
+      }
+    }
+  }
+}
+table.videos-table{
+  @extend .thumbed-table;
+  .thumb-container{
+    @extend .row-thumb;
+  }
+}
+
+.thumb-container{
+  width   : $thumb-width + ( $thumb-border-width * 2 );
+  height  : $thumb-height + ( $thumb-border-width * 2 );
+}
+.video-thumb{
+  background-size: cover;
+  background-position: center;
+  border  : $thumb-border-width solid rgba(0, 0, 0, 0.5);
+  @include hover-expand($thumb-width, $thumb-height);
 }
 
 .hero-unit{
 	padding:60px 5%;
 }
+
+
+
+
+
+
+
 
 a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
   text-decoration: none;
@@ -47,9 +109,21 @@ a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
 // forms overrides
 .form-inputs{
   @extend .row-fluid;
-  .control-group, .form-actions {
+
+  .control-group, .form-actions{
     @extend [class*="span"];
-    @extend .span4;
+    &.string, &.float{
+      @extend .span6;
+    }
+    &.text, &.form-actions {
+      @extend .span12;
+    }
+    textarea{
+      width: 95%;
+    }
+    abbr[title=required]{
+      display: none;
+    }
   }
 }
 
@@ -58,4 +132,15 @@ a [class^="icon-"], a [class*=" icon-"], a[class^="icon-"], a[class*=" icon-"] {
 .generated-code-container textarea{
   cursor: pointer;
   overflow: hidden;
+}
+
+
+.info-column{
+  @extend [class*="span"];
+  @extend .span3;
+  text-align: center;
+  label{
+    display: block;
+    @extend strong;
+  }
 }

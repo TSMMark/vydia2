@@ -1,7 +1,7 @@
 module VideosHelper
 
-  def link_to_video obj
-    link_to obj.name, video_url(obj)
+  def link_to_video obj, *options
+    link_to("#{obj.name}".html_safe, video_url(obj))
   end
 
   def token_from_link(url)

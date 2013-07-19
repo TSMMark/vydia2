@@ -1,5 +1,9 @@
 module ApplicationHelper
-  
+    
+  def nbsp
+    '&nbsp;'.html_safe
+  end
+
   # icons
   def icon icon
     "<i class=\"icon-#{icon}\"></i>".html_safe

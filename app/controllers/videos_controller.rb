@@ -60,12 +60,27 @@ class VideosController < BaseAuthController
     
   end
 
+  def thumb
+
+  end
+
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(params[:video]) do |v|
-      v.user = current_user
-      v.token = token_from_link v.token
+    token = token_from_link params[:video][:token]
+
+    gdata   = Youtube.new token
+
+    @video  = Video.new(params[:video]) do |v|
+      v.user      = current_user
+      v.token     = token
+      v.name      = gdata.title if v.name.blank?
+
+      v.yt_title          = gdata.title
+      v.yt_thumb          = gdata.thumb
+      v.yt_rating         = gdata.rating_100
+      v.yt_view_count     = gdata.view_count
+      v.yt_favorite_count = gdata.favorite_count
     end
 
     respond_to do |format|

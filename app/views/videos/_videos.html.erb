@@ -1,35 +1,48 @@
 <% unless @videos.blank? %>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Offered CPM</th>
-      <th># Networks</th>
-      <th>YouTube Token</th>
-      <th>View</th>
-      <th></th>
-      <th></th>
-    </tr>
+  <table class="datatable videos-table">
+    <thead>
+      <tr>
+        <th>Video</th>
+        <th>Offered CPM</th>
+        <th># Networks</th>
+        <th>Rating</th>
+        <th>YT Views</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <% @videos.each do |video| %>
-    <tr>
-      <!-- Video Name -->
-      <td><%= link_to_video video %></td>
+    <tbody>
+      <% @videos.each do |video| %>
+        <tr>
+          <!-- Video Name -->
+          <td>
+            <%= video.thumb_element_hover %>
+            <%= content_tag :div, link_to_video(video).html_safe, class: 'thumb-title' %>
+          </td>
 
-      <!-- Offered CPM (accounting for vydia's percentage) -->
-      <td><%= Money.new(Network.offered_cpm(video.cpm)).with_symbol %></td>
+          <!-- Offered CPM (accounting for vydia's percentage) -->
+          <td><%= Money.new(Network.offered_cpm(video.cpm)).with_symbol %></td>
 
-      <!-- Number of Networks the video is featured on -->
-      <td><%= video.networks.count %></td>
+          <!-- Number of Networks the video is featured on -->
+          <td><%= video.networks.count %></td>
 
-      <!-- YouTube String ID -->
-      <td><%= video.token%></td>
+          <!-- YouTube Rating on 100 scale -->
+          <td><%= video.score %></td>
 
-      <!-- YouTube Link -->
-      <td><%= link_to icon_youtube, video.link, target: :_blank %></td>
-      <td><%= link_to icon_update, edit_video_path(video) %></td>
-      <td><%= link_to icon_destroy, video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
+          <!-- YouTube View Count -->
+          <td><%= video.yt_view_count %></td>
+
+          <!-- YouTube Link -->
+          <td class="crud-icons">
+            <%= link_to icon_youtube, video.link, target: :_blank %>
+            <%= link_to icon_update, edit_video_path(video) %>
+            <%= link_to icon_destroy, video, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+
+
   </table>
 <% else %>
   <h5>no videos</h5>
