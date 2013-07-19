@@ -13,6 +13,7 @@
     margin-top: ($init-h * $mult / -2) + ($init-h / 2);
     z-index: 9;
     @include transition-property(width, height, margin);
+    @include transition-delay(0.5s);
     @include transition-duration(0.5s);
   }
 }
