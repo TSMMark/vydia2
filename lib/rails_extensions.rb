@@ -1,5 +1,11 @@
 module RailsExtensions
   
+  class ::Range
+    def sample *p
+      self.to_a.sample *p
+    end
+  end
+
   class ::String
 
     def numeric?

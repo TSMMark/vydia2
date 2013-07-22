@@ -29,7 +29,7 @@ class Video < BaseModel
   def networks
     super.group('networks.id')
   end
-  
+
   def count_networks
     networks.count.count
   end
@@ -99,12 +99,17 @@ class Video < BaseModel
   end
 
 
-  def network_spending network, views = nil
+  def spending network=nil, views = nil
     views ||= count_views(network)
-    calculate_spending views, self.cpm
+    calculate_spending views
   end
 
-  def calculate_spending views, bid_cpm
+  def network_spending network=nil, views = nil
+    views ||= count_views(network)
+    calculate_spending views
+  end
+
+  def calculate_spending views
     r = cpm * views.to_f / Money.one_thousand
   end
 

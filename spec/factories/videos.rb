@@ -24,16 +24,16 @@ FactoryGirl.define do
       evaluator.network_count.times do
         n = FactoryGirl.create :network_default
         evaluator.impression_count.times do
-          i=FactoryGirl.build :impression_default do |i|
-            i.video_id    = video.id
-            i.network_id  = n.id
-          end
-          i.save
+          FactoryGirl.create(:impression_with_play,
+            video:    video,
+            network:  n
+          )
         end
       end
+      # SpecHelper::PlayHelper.randomize_states
     end
-
-
   end
+
+
 
 end

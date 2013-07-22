@@ -41,3 +41,20 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
+
+module SpecHelper
+  class PlayHelper
+    def self.randomize_states
+      Play.where("state IS NULL OR state == 0").all.each do |p|
+        p.state = (0..4).sample
+        p.save!
+      end
+    end
+  end
+end
+
+
+
+
+
+

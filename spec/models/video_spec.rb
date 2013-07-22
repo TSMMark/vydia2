@@ -24,23 +24,33 @@ describe Video do
     it { Video.find(id).should    == video }
   end
 
-  describe 'with plays' do
+  describe 'with impressions' do
     let (:video) { FactoryGirl.create :video_with_impressions }
+
     it { video.count_impressions.should > 0 }
     it { video.impressions.count.should == video.count_impressions }
-    it { video.networks.count.should > 0 }
 
-    it '' do
+    context 'networks' do
+      it { video.count_networks.should > 0 }
 
-    end
-
-    it 'network impressions match video impressions' do
-      video.networks.each do |n|
-        v_i = video.count_impressions(n)
-        v_i.should > 0
-        v_i.should == n.count_impressions(video)
+      it { video.count_networks.should == video.networks.all.count }
+      it 'network impressions match video impressions' do
+        video.networks.each do |n|
+          v_i = video.count_impressions(n)
+          v_i.should > 0
+          v_i.should == n.count_impressions(video)
+        end
       end
     end
+
+    it { video.count_plays.should > 0 }
+    it { video.count_plays.should == video.plays.count }
+
+    it { video.count_views.should > 0 }
+    it { video.count_views.should >= video.count_plays }
+
+    it { video.calculate_spending(100).should == video.cpm * 100.0 / Money.one_thousand }
+
   end
 
 end
