@@ -27,8 +27,13 @@ class Video < BaseModel
   end
 
   def networks
-    super.group('networks.id').all
+    super.group('networks.id')
   end
+  
+  def count_networks
+    networks.count.count
+  end
+
 
   # youtube stats
   def score
@@ -82,11 +87,11 @@ class Video < BaseModel
 
   def count_impressions network=nil, o={}
     i = self.impressions(network, o)
-    i.all.count
+    i.count
   end
 
   def count_plays network=nil, o={}
-    i = plays(network, o).all.count
+    i = plays(network, o).count
   end
 
   def count_views network=nil

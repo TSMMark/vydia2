@@ -1,5 +1,7 @@
 class Impression < BaseModel
-  attr_accessible :ip_address, :network_id, :referer, :request_url, :user_agent, :video_id
+  attr_accessible :video_id, :network_id,
+                  :ip_address, :referer,
+                  :request_url, :user_agent
 
   belongs_to :video, inverse_of: :impressions
   belongs_to :network, inverse_of: :impressions

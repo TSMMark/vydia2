@@ -21,7 +21,11 @@ class Network < BaseModel
   end
 
   def videos
-    super.group('videos.id').all
+    super.group('videos.id')
+  end
+
+  def count_videos
+    videos.count.count
   end
 
   def impressions video=nil, o={}
@@ -42,11 +46,11 @@ class Network < BaseModel
 
   def count_impressions video=nil, o={}
     i = self.impressions video, o
-    i.all.count
+    i.count
   end
 
   def count_plays video=nil, o={}
-    plays(video, o).all.count
+    plays(video, o).count
   end
   def count_views video=nil
     count_plays video, unique: false
