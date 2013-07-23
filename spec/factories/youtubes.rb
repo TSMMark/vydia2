@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :youtube do
+    skip_create
+
+    initialize_with { new(FactoryGirl.generate :video_token) }
   end
 end

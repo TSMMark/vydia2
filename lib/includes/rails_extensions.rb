@@ -1,5 +1,19 @@
 module RailsExtensions
   
+  class REQUEST
+    require "net/http"
+    require "uri"
+    def self.get_response uri
+      Net::HTTP.get_response(parse_uri(uri))
+    end
+    def self.response_body uri
+      get_response(uri).body
+    end
+    def self.parse_uri uri
+      URI.parse(uri)
+    end
+  end
+
   class ::Range
     def sample *p
       self.to_a.sample *p
@@ -7,18 +21,33 @@ module RailsExtensions
   end
 
   class ::String
+    
+    require "uri"
+    def uri?
+      uri = URI.parse(self)
+      %w( http https ).include?(uri.scheme)
+    rescue URI::BadURIError
+      false
+    rescue URI::InvalidURIError
+      false
+    end
 
     def numeric?
       self.match(/^[0-9]+\z/)
     end
 
     def positive_integer?
-      self.to_i > 0
+      self.to_i.positive?
+    end
+
+    def negative_integer?
+      self.to_i.negative?
     end
 
     def nonnegative_integer?
-      self.to_i >= 0
+      !self.to_i.negative?
     end
+
 
     # parameters / arguments
     def cgi_escape!
@@ -35,9 +64,36 @@ module RailsExtensions
 
   end
 
+  class ::Fixnum
+    def positive?
+      self > 0
+    end
+    def zero?
+      self == 0
+    end
+    def negative?
+      self < 0
+    end
+    def non_negative?
+      !negative?
+    end
+  end
+
   class ::Float
     def rount_to n=0
       (self * (10.0 ** n)).round * (10.0 ** (-n))
+    end
+    def positive?
+      self > 0
+    end
+    def zero?
+      self == 0
+    end
+    def negative?
+      self < 0
+    end
+    def non_negative?
+      !negative?
     end
   end
 

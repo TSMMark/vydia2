@@ -1,14 +1,9 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-
-def random_youtube_token
-  ['r_Jwx3XKcXU','JjDre7EaHFQ'].sample
-end
-
 FactoryGirl.define do
   factory :video do
     name
-    token { random_youtube_token }
+    token { FactoryGirl.generate :video_token }
     cpm
   end
   factory :video_default, parent: :video do

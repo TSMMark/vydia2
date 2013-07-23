@@ -17,6 +17,9 @@ FactoryGirl.define do
   }
   sequence(:referer)      { |n| "examplerefererurl#{n}.com" }
   sequence(:request_url)  { |n| "examplerequesturl#{n}.com" }
-  sequence(:user_agent)    { |n| "example user agent #{n}" }
+  sequence(:user_agent)   { |n| "example user agent #{n}" }
+
+  sequence(:video_token)  { |n| ['r_Jwx3XKcXU','JjDre7EaHFQ'].sample }
+
 
 end
