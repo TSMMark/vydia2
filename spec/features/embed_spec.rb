@@ -29,7 +29,7 @@ describe :Embed do
 
   # , driver: :webkit_debug
   context 'impressions', js: true do
-    before :each do
+    before do
       Capybara.current_driver = :webkit
     end
 
@@ -38,9 +38,7 @@ describe :Embed do
     let (:user)       { FactoryGirl.create :user_default }
     
     # for some reason we need this in order for the spec below
-    it 'visits a non-qt page' do
-      visit video_path(video)
-    end
+    it { visit video_path(video) }
 
     it 'registers impressions, views and plays' do
       visit video_path(video)
