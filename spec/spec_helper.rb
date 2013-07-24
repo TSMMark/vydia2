@@ -9,7 +9,8 @@ require 'factory_girl_rails'
 # FactoryGirl.find_definitions
 
 # capybara poltergeist
-require 'capybara/poltergeist'
+# require 'capybara/poltergeist'
+# require 'capybara'
 
 # Capybara.register_driver :poltergeist do |app|
 #   options = {
@@ -20,18 +21,18 @@ require 'capybara/poltergeist'
 # end
 # Capybara.javascript_driver = :poltergeist
 
-Capybara.register_driver :poltergeist do |app|
-  options = {
-    # debug: true,
-    window_size: [1024, 768],
-    # phantomjs_options: ['--web-security=no'],
-    inspector: true
-  }
-  Capybara::Poltergeist::Driver.new(app, options)
-end
+# Capybara.register_driver :poltergeist do |app|
+#   options = {
+#     # debug: true,
+#     window_size: [1024, 768],
+#     # phantomjs_options: ['--web-security=no'],
+#     inspector: true
+#   }
+#   Capybara::Poltergeist::Driver.new(app, options)
+# end
 
+# # Capybara.javascript_driver = :poltergeist
 # Capybara.javascript_driver = :poltergeist
-Capybara.javascript_driver = :poltergeist
 
 
 # require 'capybara/poltergeist'
@@ -40,8 +41,9 @@ Capybara.javascript_driver = :poltergeist
 # end
 # Capybara.javascript_driver = :selenium
 
-# require 'capybara'
-# Capybara.javascript_driver = :webkit
+require 'capybara'
+require 'capybara-webkit'
+Capybara.javascript_driver = :webkit_debug
 
 
 # Capybara.register_driver :selenium do |app|

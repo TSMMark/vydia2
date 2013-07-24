@@ -27,17 +27,18 @@ describe :Embed do
 
   end
 
-  context 'impressions', js: true, driver: :webkit_debug do
+  # , driver: :webkit_debug
+  context 'impressions', js: true do
     let (:video)      { FactoryGirl.create :video_default }
     let (:network)    { FactoryGirl.create :network_default }
     let (:user)       { FactoryGirl.create :user_default }
     
-    before do
-      # Capybara.javascript_driver = :webkit
+    it 'visits a non-qt page', js: true do
+      visit video_path(video)
     end
 
-    it 'visits a page' do
-      
+    it 'visits a page', js: true do
+
       # get starting impressions
       impressions = video.count_impressions(network)
 
@@ -60,20 +61,24 @@ describe :Embed do
       # find(:css, '.iframe-container').trigger(:click)
 
 
-      sleep 8
+      # sleep 8
 
       # find('#player').click
 
       # page.driver.click(150,150)
 
-      within_frame 'player' do
+      page.should have_css('#player')
+
+      page.within_frame 'player' do
         # begin playing video
         # find('embed').click
         # click(50, 50)
         # page.clickAt('50,50')
         page.should have_css('.full-frame')
         page.should have_css('#player1')
-        find(:css, '.full-frame #player1').click #.trigger(:click)
+
+        # page.driver.click(50, 50)
+        find_by_id('player1').click
       end
       # find(:css, 'embed').trigger(:click)
       # page.driver.clickAt(find(:css, '#player'),'50,50')
