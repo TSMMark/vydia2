@@ -29,6 +29,10 @@ describe :Embed do
 
   # , driver: :webkit_debug
   context 'impressions', js: true do
+    before :each do
+      Capybara.current_driver = :webkit
+    end
+
     let (:video)      { FactoryGirl.create :video_default }
     let (:network)    { FactoryGirl.create :network_default }
     let (:user)       { FactoryGirl.create :user_default }
@@ -39,6 +43,7 @@ describe :Embed do
     end
 
     it 'registers impressions, views and plays' do
+      visit video_path(video)
 
       # get starting impressions
       impressions = video.count_impressions(network)
@@ -71,10 +76,6 @@ describe :Embed do
 
       # wait for bounce to register
       wait_until_long { video.count_bounces(network) == bounces + 1 }
-
-
-      # visit embed_path(id: video.id, network_id: network.id)
-      # visit user_path(user)
     end
 
   end

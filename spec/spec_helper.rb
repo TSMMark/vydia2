@@ -9,17 +9,19 @@ require 'factory_girl_rails'
 # FactoryGirl.find_definitions
 
 # capybara poltergeist
-# require 'capybara/poltergeist'
-# require 'capybara'
+require 'capybara'
+require 'capybara/poltergeist'
 
-# Capybara.register_driver :poltergeist do |app|
-#   options = {
-#     debug: true, window_size: [1024, 768],
-#     phantomjs_options: ['--web-security=no']
-#   }
-#   Capybara::Poltergeist::Driver.new(app, options)
-# end
-# Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  options = {
+    debug: true,
+    window_size: [1024, 768],
+    inspector: true
+    # phantomjs_options: ['--web-security=no']
+  }
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+Capybara.javascript_driver = :poltergeist
 
 # Capybara.register_driver :poltergeist do |app|
 #   options = {
@@ -41,11 +43,10 @@ require 'factory_girl_rails'
 # end
 # Capybara.javascript_driver = :selenium
 
-require 'capybara'
 require 'capybara-webkit'
 
-Capybara.default_wait_time  = 8
-Capybara.javascript_driver  = :webkit
+Capybara.default_wait_time  = 10
+# Capybara.javascript_driver  = :webkit
 
 
 # Capybara.register_driver :selenium do |app|
@@ -126,6 +127,21 @@ module Capybara
     end
   end
 end
+
+def without_transactional_fixtures(&block)
+  self.use_transactional_fixtures = false
+
+  before(:all) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  yield
+
+  after(:all) do
+    DatabaseCleaner.strategy = :transaction
+  end
+end
+
 def wait_until time=0.1
   require "timeout"
   Timeout.timeout(Capybara.default_wait_time) do
