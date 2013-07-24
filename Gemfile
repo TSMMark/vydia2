@@ -56,7 +56,19 @@ gem 'money-rails'
 # SPEC
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
+
+  gem "database_cleaner", "~> 1.0.1"
+
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+
+  gem 'selenium-webdriver'
+  
+  gem 'poltergeist', git: 'git://github.com/jonleighton/poltergeist.git'
+  gem 'capybara-webkit'
 end
+
 gem 'factory_girl_rails', '~> 4.0', :require => false
 
 # gem 'paperclip', "~> 3.0"

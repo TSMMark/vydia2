@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717211908) do
+ActiveRecord::Schema.define(:version => 20130723164138) do
 
   create_table "impressions", :force => true do |t|
     t.integer  "video_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20130717211908) do
     t.integer  "yt_favorite_count"
     t.string   "yt_thumb"
     t.string   "yt_title"
+    t.datetime "yt_published"
   end
 
   add_index "videos", ["token"], :name => "index_videos_on_token", :unique => true

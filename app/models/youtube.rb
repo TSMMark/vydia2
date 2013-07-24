@@ -12,7 +12,7 @@ class Youtube
                 :yt_rating, :max_rating, :min_rating,
                 :rating_100,
                 :view_count, :favorite_count,
-                :yt_published
+                :published
 
   def initialize(token)
     self.token = token
@@ -88,7 +88,7 @@ class Youtube
     self.view_count     = self.gdata['yt$statistics']['viewCount'].to_i
     self.favorite_count = self.gdata['yt$statistics']['favoriteCount'].to_i
     self.title          = self.gdata['title']['$t']
-    self.yt_published   = self.gdata['published']['$t']
+    self.published      = self.gdata['published']['$t'].to_datetime
 
     _thumb_url
     _rating_100

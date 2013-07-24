@@ -64,6 +64,10 @@ class Network < BaseModel
   end
 
 
+  def count_bounces video=nil
+    count_plays(video, unique: false, max_state: 0)
+  end
+
   # amount of money a network has made on vydia
   #   total of all network's video_revenue added up
   def revenue

@@ -47,7 +47,7 @@
           full_plays = n.count_plays(@video, unique: false, min_state: 4)
           totals[:full_plays] += full_plays
 
-          bounces = n.count_plays(@video, unique: false, max_state: 0)
+          bounces = n.count_bounces(@video)
           totals[:bounces] += bounces
 
           spent = @video.network_spending(n, views)

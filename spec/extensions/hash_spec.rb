@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Hash do
+  it_should_behave_like :each_spec
   let (:original_hash)  { {somekey: :somevalue, anotherkey: :anothervalue, yetanother: :yetvalue} }
   let (:hash)           { original_hash.clone }
 

@@ -98,6 +98,10 @@ class Video < BaseModel
     count_plays network, unique: false
   end
 
+  def count_bounces network=nil
+    count_plays(network, unique: false, max_state: 0)
+  end
+
 
   def spending network=nil, views = nil
     views ||= count_views(network)

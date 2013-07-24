@@ -81,6 +81,7 @@ class VideosController < BaseAuthController
       v.yt_rating         = gdata.rating_100
       v.yt_view_count     = gdata.view_count
       v.yt_favorite_count = gdata.favorite_count
+      v.yt_published      = gdata.published
     end
 
     respond_to do |format|

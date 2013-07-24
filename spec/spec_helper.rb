@@ -8,9 +8,62 @@ require 'rspec/autorun'
 require 'factory_girl_rails'
 # FactoryGirl.find_definitions
 
+# capybara poltergeist
+require 'capybara/poltergeist'
+
+# Capybara.register_driver :poltergeist do |app|
+#   options = {
+#     debug: true, window_size: [1024, 768],
+#     phantomjs_options: ['--web-security=no']
+#   }
+#   Capybara::Poltergeist::Driver.new(app, options)
+# end
+# Capybara.javascript_driver = :poltergeist
+
+Capybara.register_driver :poltergeist do |app|
+  options = {
+    # debug: true,
+    window_size: [1024, 768],
+    # phantomjs_options: ['--web-security=no'],
+    inspector: true
+  }
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+
+# Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist
+
+
+# require 'capybara/poltergeist'
+# Capybara.register_driver :selenium do |app|
+  # Capybara::Selenium::Driver.new(app, :browser => :chrome)
+# end
+# Capybara.javascript_driver = :selenium
+
+# require 'capybara'
+# Capybara.javascript_driver = :webkit
+
+
+# Capybara.register_driver :selenium do |app|
+#   profile = Selenium::WebDriver::Firefox::Profile.new
+#   profile.native_events = true
+#   Capybara::Selenium::Driver.new(app, :browser => :firefox, profile: profile)
+# end
+# Capybara.register_driver :poltergeist_debug do |app|
+#   Capybara::Poltergeist::Driver.new(app, :inspector => true)
+# end
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
+# clean db from last tests
+require 'database_cleaner'
+def clean_db
+  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.clean
+end
+clean_db
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -41,6 +94,9 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
 
 module SpecHelper
   class PlayHelper
@@ -53,7 +109,19 @@ module SpecHelper
   end
 end
 
-
+module Capybara
+  module Node
+    class Element
+      # def hover
+      #   @session.driver.browser.action.move_to(self.native).perform
+      # end
+      def trigger event
+        self.send(event)
+        # @session.driver.browser.action.move_to(self.native).perform
+      end
+    end
+  end
+end
 
 
 

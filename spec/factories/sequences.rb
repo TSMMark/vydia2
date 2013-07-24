@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   sequence(:name)       { |n| "Example Name #{n}" }
+  sequence(:password)   { |n| "examplepassword#{n}" }
   sequence(:email)      { |n| "foo#{n}@trendsettermarketing.net" }
   sequence(:bad_email)  { |n| "foo#{n}@example.com" }
   sequence(:cpm)        { |n| [1,2,3,4,5,6,7,8,9,10].sample * n }
@@ -19,7 +20,14 @@ FactoryGirl.define do
   sequence(:request_url)  { |n| "examplerequesturl#{n}.com" }
   sequence(:user_agent)   { |n| "example user agent #{n}" }
 
-  sequence(:video_token)  { |n| ['r_Jwx3XKcXU','JjDre7EaHFQ'].sample }
+  sequence(:video_token)  { |n|
+    t = [
+      'r_Jwx3XKcXU','JjDre7EaHFQ','OR6AV9yJPoM','AMOOkBWr9G4','v0r8zxsWoR4','Z5pWz_OR5Sg','LpKyzSxVhk4','g8gJOCwBuFc','rMqayQ-U74s','tvnGBYMe9gM','OY1vdSw2zhY','iVtV6NWFbGM','HBxt_v0WF6Y','A3MGfJ3eMGA','PQjovLrnvVo','rMqayQ-U74s','Y5fBdpreJiU','LsOo3jzkhYA','mgVwv0ZuPhM','g88sc4wY4ow','LUrUPzLm5SI','9ha5ujHnYXg','Uggz88zl8QQ','cmSbXsFE3l8','d5hvgBD68_s','lExW80sXsHs','SMpL6JKF5Ww','QK8mJJJvaes','KlyXNRrsk4A','uPOUgobWTT0','JF8BRvqGCNs','9A4udiJJzXY','LrUvu1mlWco','Ys7-6_t7OEQ','fDUKt_XgfJ4','KQ6zr6kCPj8','EX1I2LI8Wc8','vNoKguSdy4Y','pTUJmnh7B4Q','kYtGl1dX5qI','f8Q3TDkhZrA','eQWG8BVeryU','FOIjvHjK0Rw','KRaWnd3LJfs','IsUsVbTj2AY','mLTSOUTNH0w','mLTSOUTNH0w','pEz95ql6tlI','uuwfgXD8qV8','9bZkp7q19f0','Pum3DpmbEl4','nPvuNsRccVw','sPhhZg9v9NU','fQrbZzRbD8k','8UVNT4wvIGY','7w8QnRe0nEI','NKDXuCE7LeQ','k0BWlvnBmIE','2zNSgSzhBfM','ToPh26T6bgk','mIQToVqDMb8','Rgox84KE7iY','KmxaY_OVvWA','ghOsK2582zM','dxytyRy-O1k','NicMZ589snY','7470G2NYpxs','fnKNz7FxmPc','lSi6W29MxGs','AgFeZr5ptV8','GDY5GSb_-TA','zsmUOdmm02A','unRldLdllZ8','WU7SGn0MeP0','na_l3zUirRo','ndhDDbgriB8','g8MfmzFf-F0','W9pwmD8J8yg','B9rSBcoX9ak','jGwfa1CF5Yo','g3GhDWMb_3E','lSCUKqVqs7I',
+      'fWNaR-rxAic'
+    ][n]
+    puts t
+    t
+  }
 
 
 end

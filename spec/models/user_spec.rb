@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe User do
+  it_should_behave_like :each_spec
 
   context 'when registering' do
     context 'a trendsetter' do

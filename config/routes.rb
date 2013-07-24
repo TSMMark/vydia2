@@ -7,7 +7,7 @@ Omrails::Application.routes.draw do
   get 'i/:id/:network_id' => 'tracker#impression'
   get 'v/:id/:network_id' => 'tracker#view'
 
-  get 'videos/:id/embed(/:network_id)' => 'videos#embed'
+  get 'videos/:id/embed(/:network_id)' => 'videos#embed', as: :embed
   resources :videos
 
   # resources :pins

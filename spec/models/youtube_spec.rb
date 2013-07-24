@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Youtube do
+  it_should_behave_like :each_spec
   let   (:youtube) { FactoryGirl.build :youtube }
   subject { youtube }
 
@@ -53,6 +54,11 @@ describe Youtube do
       subject { REQUEST.get_response(youtube.thumb) }
       it { subject.content_type.should == 'image/jpeg' }
     end
+  end
+
+  context :published do
+    subject { youtube.published }
+    it { should be_a DateTime}
   end
 
 end

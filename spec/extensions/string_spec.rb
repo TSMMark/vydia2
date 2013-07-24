@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe String do
+  it_should_behave_like :each_spec
 
   describe :numeric? do
     it { '584305'.should      be_numeric }
