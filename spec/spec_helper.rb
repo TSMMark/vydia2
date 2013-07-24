@@ -43,7 +43,9 @@ require 'factory_girl_rails'
 
 require 'capybara'
 require 'capybara-webkit'
-Capybara.javascript_driver = :webkit_debug
+
+Capybara.default_wait_time  = 8
+Capybara.javascript_driver  = :webkit
 
 
 # Capybara.register_driver :selenium do |app|
@@ -124,7 +126,19 @@ module Capybara
     end
   end
 end
-
+def wait_until time=0.1
+  require "timeout"
+  Timeout.timeout(Capybara.default_wait_time) do
+    sleep(time) until value = yield
+    value
+  end
+  # rescue Timeout::Error
+end
+def wait_until_long
+  wait_until 1 do
+    yield
+  end
+end
 
 
 

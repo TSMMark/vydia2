@@ -33,15 +33,14 @@ describe :Embed do
     let (:network)    { FactoryGirl.create :network_default }
     let (:user)       { FactoryGirl.create :user_default }
     
-    it 'visits a non-qt page', js: true do
+    it 'visits a non-qt page' do
       visit video_path(video)
     end
 
-    it 'visits a page', js: true do
+    it 'visits a page' do
 
       # get starting impressions
       impressions = video.count_impressions(network)
-
 
       # page path
       path = embed_path(video.token, network.token)
@@ -68,23 +67,19 @@ describe :Embed do
       # page.driver.click(150,150)
 
       page.should have_css('#player')
+      
+      wait_until { find_by_id('player').tag_name == 'iframe' }
 
       page.within_frame 'player' do
         # begin playing video
-        # find('embed').click
-        # click(50, 50)
-        # page.clickAt('50,50')
         page.should have_css('.full-frame')
         page.should have_css('#player1')
 
-        # page.driver.click(50, 50)
         find_by_id('player1').click
       end
-      # find(:css, 'embed').trigger(:click)
-      # page.driver.clickAt(find(:css, '#player'),'50,50')
 
       # wait for bounce to register
-      sleep 8
+      wait_until_long { video.count_bounces(network) == bounces + 1 }
 
       # bounces increases
       video.count_bounces(network).should == bounces + 1
