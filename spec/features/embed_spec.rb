@@ -39,7 +39,7 @@ describe :Embed do
     
     # for some reason we need this in order for the spec below
     it { visit video_path(video) }
-
+    
     it 'registers impressions, views and plays' do
       visit video_path(video)
 
@@ -60,8 +60,8 @@ describe :Embed do
       # get initial bounces
       bounces = video.count_bounces(network)
 
+      # make sure the player is on the page (won't yet be iframe)
       page.should have_css('#player')
-      
       wait_until { find_by_id('player').tag_name == 'iframe' }
 
       page.within_frame 'player' do
@@ -74,6 +74,7 @@ describe :Embed do
 
       # wait for bounce to register
       wait_until_long { video.count_bounces(network) == bounces + 1 }
+
     end
 
   end
