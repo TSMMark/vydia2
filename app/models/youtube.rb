@@ -43,7 +43,9 @@ class Youtube
   def _rating_100
     max = self.max_rating
     min = self.min_rating
-    self.rating_100 = (self.yt_rating - min) * (100 / (max - min))
+    self.rating_100 = self.yt_rating.blank? ?
+        0 :
+        (self.yt_rating - min) * (100 / (max - min))
   end
 
   def persisted?
@@ -82,16 +84,25 @@ class Youtube
 
   protected
   def collect_important_attrs
-    self.yt_rating      = self.gdata['gd$rating']['average'].to_f
-    self.max_rating     = self.gdata['gd$rating']['max'].to_i
-    self.min_rating     = self.gdata['gd$rating']['min'].to_i
-    self.view_count     = self.gdata['yt$statistics']['viewCount'].to_i
-    self.favorite_count = self.gdata['yt$statistics']['favoriteCount'].to_i
-    self.title          = self.gdata['title']['$t']
-    self.published      = self.gdata['published']['$t'].to_datetime
+    # self.gdata.ryaml
+    return if self.gdata.blank?
+
+    unless self.gdata['gd$rating'].blank?
+      self.yt_rating      = self.gdata['gd$rating']['average'].to_f
+      self.max_rating     = self.gdata['gd$rating']['max'].to_i
+      self.min_rating     = self.gdata['gd$rating']['min'].to_i
+    end
+    _rating_100
+
+    unless self.gdata['yt$statistics'].blank?
+      self.view_count     = self.gdata['yt$statistics']['viewCount'].to_i
+      self.favorite_count = self.gdata['yt$statistics']['favoriteCount'].to_i
+    end
+
+    self.title            = self.gdata['title']['$t']
+    self.published        = self.gdata['published']['$t'].to_datetime
 
     _thumb_url
-    _rating_100
   end
 
 end
