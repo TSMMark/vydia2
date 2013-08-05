@@ -7,7 +7,8 @@ class Video < BaseModel
                   :ad_after, :ad_bottom,
                   :yt_title,
                   :yt_thumb, :yt_rating,
-                  :yt_view_count, :yt_favorite_count
+                  :yt_view_count, :yt_favorite_count,
+                  :yt_published
 
   belongs_to :user, inverse_of: :videos
 
