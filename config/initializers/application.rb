@@ -11,6 +11,4 @@
 #require 'my_modules/active_record/active_record_extensions'
 # ... require any other custom modules your application uses
 
-require 'rails_extensions'
-
-require 'money_extensions'
+Dir[Rails.root.join("lib/includes/**/*.rb")].each { |f| require f }

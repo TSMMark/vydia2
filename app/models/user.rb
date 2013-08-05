@@ -13,11 +13,11 @@ class User < BaseModel
   has_many :videos, inverse_of: :user
 
 
-  validate :is_trendsetter
+  validate :trendsetter?
 
 
-  private
-  def is_trendsetter
+  protected
+  def trendsetter?
     errors.add(:email, "No access.") unless
       (self.email =~ /.+@trendsettermarketing\.net/)
   end

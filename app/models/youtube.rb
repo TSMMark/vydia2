@@ -11,32 +11,17 @@ class Youtube
                 :title, :base_thumb_url,
                 :yt_rating, :max_rating, :min_rating,
                 :rating_100,
-                :view_count, :favorite_count
+                :view_count, :favorite_count,
+                :published
 
   def initialize(token)
     self.token = token
     self.gdata = Youtube.get_gdata token
-    self.collect_important_attrs
-  end
-
-  def collect_important_attrs
-    self.yt_rating      = self.gdata["gd$rating"]["average"]
-    self.max_rating     = self.gdata["gd$rating"]["max"]
-    self.min_rating     = self.gdata["gd$rating"]["min"]
-    self.view_count     = self.gdata["yt$statistics"]["viewCount"]
-    self.favorite_count = self.gdata["yt$statistics"]["favoriteCount"]
-    self.title          = self.gdata["title"]["$t"]
-
-    _thumb_url
-    _rating_100
+    collect_important_attrs
   end
 
   def thumb size="default"
     Youtube.thumb(self.base_thumb_url, size)
-  end
-  def self.thumb url, size="default"
-    # sizes = default, mqdefault, hqdefault, sddefault, start, middle, end
-    url.gsub('default',size).gsub('%size',size)
   end
 
   def _thumb_url
@@ -69,12 +54,17 @@ class Youtube
 
 
   # Class Methods
+  def self.thumb url, size="default"
+    # sizes = default, mqdefault, hqdefault, sddefault, start, middle, end
+    url.gsub('default',size).gsub('%size',size)
+  end
+
   def self.gdata_url token
-    URI.parse "https://gdata.youtube.com/feeds/api/videos/#{token}?v=2&alt=json"
+    "https://gdata.youtube.com/feeds/api/videos/#{token}?v=2&alt=json"
   end
 
   def self.response_body url
-    Net::HTTP.get_response(url).body
+    REQUEST.response_body(url)
   end
 
   def self.get_gdata token
@@ -87,6 +77,21 @@ class Youtube
     #   return nil
     # end
     return hash
+  end
+
+
+  protected
+  def collect_important_attrs
+    self.yt_rating      = self.gdata['gd$rating']['average'].to_f
+    self.max_rating     = self.gdata['gd$rating']['max'].to_i
+    self.min_rating     = self.gdata['gd$rating']['min'].to_i
+    self.view_count     = self.gdata['yt$statistics']['viewCount'].to_i
+    self.favorite_count = self.gdata['yt$statistics']['favoriteCount'].to_i
+    self.title          = self.gdata['title']['$t']
+    self.published      = self.gdata['published']['$t'].to_datetime
+
+    _thumb_url
+    _rating_100
   end
 
 end

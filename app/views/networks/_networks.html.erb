@@ -17,7 +17,7 @@
     <% @networks.each do |network| %>
       <tr>
         <td><%= link_to_network network %></td>
-        <td><%= network.videos.count %></td>
+        <td><%= network.count_videos %></td>
         <td><%= network.token%></td>
         <td><%= link_to icon_update, edit_network_path(network) %></td>
         <td><%= link_to icon_destroy, network, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -24,7 +24,7 @@ class Play < BaseModel
     where("state >= ?", 4)
   end
 
-  # play >= 25%
+  # play >= default_min_state
   def self.views
     where("state >= ? AND state <= ?", default_min_state, default_max_state)
   end

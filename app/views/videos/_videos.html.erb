@@ -24,7 +24,7 @@
           <td><%= Money.new(Network.offered_cpm(video.cpm)).with_symbol %></td>
 
           <!-- Number of Networks the video is featured on -->
-          <td><%= video.networks.count %></td>
+          <td><%= video.count_networks %></td>
 
           <!-- YouTube Rating on 100 scale -->
           <td><%= video.score %></td>
